@@ -14,15 +14,7 @@ class Character(models.Model):
     skills = models.ManyToManyField('Skill')
     opmerkingen = models.TextField()
     x_factor = models.CharField(max_length=250)
-    spreuk1 = models.ManyToManyField('Spreuk')
-    spreuk2 = models.ManyToManyField('Spreuk')
-    spreuk3 = models.ManyToManyField('Spreuk')
-    spreuk4 = models.ManyToManyField('Spreuk')
-    spreuk5 = models.ManyToManyField('Spreuk')
-    spreuk6 = models.ManyToManyField('Spreuk')
-    spreuk7 = models.ManyToManyField('Spreuk')
-    spreuk8 = models.ManyToManyField('Spreuk')
-    spreuk9 = models.ManyToManyField('Spreuk')
+    spreuken = models.ManyToManyField('Spreuk')
 
 class Skill(models.Model):
     naam = models.CharField(max_length=50)
