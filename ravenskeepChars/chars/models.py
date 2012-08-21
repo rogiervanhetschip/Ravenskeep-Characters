@@ -30,6 +30,9 @@ class Character(models.Model):
     def __unicode__(self):
         return self.character_naam
 
+    class Meta:
+        ordering = ['speler', 'character_naam']
+
 class Player(models.Model):
     voornaam = models.CharField(max_length=50)
     tussenvoegsels = models.CharField(max_length=50, blank=True)
@@ -39,9 +42,12 @@ class Player(models.Model):
         if self.tussenvoegsels is None:
             return self.voornaam + " " + self.achternaam
         return self.voornaam + " " + self.tussenvoegsels + " " + self.achternaam
-    
+
     def __unicode__(self):
         return self.naam()
+
+    class Meta:
+        ordering = ['achternaam', 'voornaam']    
 
 class Skill(models.Model):
     naam = models.CharField(max_length=50)
@@ -50,17 +56,26 @@ class Skill(models.Model):
     def __unicode__(self):
         return self.naam
 
+    class Meta:
+        ordering = ['naam']
+
 class God(models.Model):
     naam = models.CharField(max_length=50)
 
     def __unicode__(self):
         return self.naam
 
+    class Meta:
+        ordering = ['naam']
+
 class Race(models.Model):
     naam = models.CharField(max_length=50)
 
     def __unicode__(self):
         return self.naam
+
+    class Meta:
+        ordering = ['naam']
 
 class Item(models.Model):
     naam = models.CharField(max_length=50)
@@ -69,12 +84,18 @@ class Item(models.Model):
     def __unicode__(self):
         return self.naam
 
+    class Meta:
+        ordering = ['character', 'naam']
+
 class Spell(models.Model):
     naam = models.CharField(max_length=50)
     niveau = models.PositiveIntegerField()
 
     def __unicode__(self):
         return self.naam + " (" + str(self.niveau) + ")"
+
+    class Meta:
+        ordering = ['naam', 'niveau']
 
 class ItemInline(admin.TabularInline):
     model = Item
@@ -83,6 +104,8 @@ class CharacterAdmin(admin.ModelAdmin):
     inlines = [
         ItemInline,
     ]
+
+    list_display = ('character_naam', 'speler')
 
     readonly_fields = ('xp_totaal', 'xp_besteed', 'xp_restant', 'id')
 

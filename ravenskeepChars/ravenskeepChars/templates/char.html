@@ -66,8 +66,8 @@
 		
 		<div class="blok">
 			<div>Bezittingen:</div>		
-			{% for item in char.items.all %}
-				{{ item.naam }}
+			{% for item in char.item_set.all %}
+				<div class="substatkolom">{{ item.naam }}</div>
 			{% endfor %}
 		</div>
 	
@@ -96,7 +96,7 @@
 			<div>Opmerkingen:</div>
 			<div>
 				<p>
-					{{ char.opmerkingen }}
+					{{ char.opmerkingen|linebreaks }}
 				</p>
 			</div>
 		</div>
