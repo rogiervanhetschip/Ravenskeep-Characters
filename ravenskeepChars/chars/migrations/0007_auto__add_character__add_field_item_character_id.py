@@ -43,52 +43,10 @@ class Migration(SchemaMigration):
         ))
         db.create_unique('chars_character_spreuken', ['character_id', 'spell_id'])
 
-        # Adding model 'Player'
-        db.create_table('chars_player', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('voornaam', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('tussenvoegsels', self.gf('django.db.models.fields.CharField')(max_length=50, blank=True)),
-            ('achternaam', self.gf('django.db.models.fields.CharField')(max_length=50)),
-        ))
-        db.send_create_signal('chars', ['Player'])
-
-        # Adding model 'Skill'
-        db.create_table('chars_skill', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('naam', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('punten', self.gf('django.db.models.fields.PositiveIntegerField')()),
-        ))
-        db.send_create_signal('chars', ['Skill'])
-
-        # Adding model 'God'
-        db.create_table('chars_god', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('naam', self.gf('django.db.models.fields.CharField')(max_length=50)),
-        ))
-        db.send_create_signal('chars', ['God'])
-
-        # Adding model 'Race'
-        db.create_table('chars_race', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('naam', self.gf('django.db.models.fields.CharField')(max_length=50)),
-        ))
-        db.send_create_signal('chars', ['Race'])
-
-        # Adding model 'Item'
-        db.create_table('chars_item', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('naam', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('character_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['chars.Character'])),
-        ))
-        db.send_create_signal('chars', ['Item'])
-
-        # Adding model 'Spell'
-        db.create_table('chars_spell', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('naam', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('niveau', self.gf('django.db.models.fields.PositiveIntegerField')()),
-        ))
-        db.send_create_signal('chars', ['Spell'])
+        # Adding field 'Item.character_id'
+        db.add_column('chars_item', 'character_id',
+                      self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['chars.Character']),
+                      keep_default=False)
 
 
     def backwards(self, orm):
@@ -101,23 +59,8 @@ class Migration(SchemaMigration):
         # Removing M2M table for field spreuken on 'Character'
         db.delete_table('chars_character_spreuken')
 
-        # Deleting model 'Player'
-        db.delete_table('chars_player')
-
-        # Deleting model 'Skill'
-        db.delete_table('chars_skill')
-
-        # Deleting model 'God'
-        db.delete_table('chars_god')
-
-        # Deleting model 'Race'
-        db.delete_table('chars_race')
-
-        # Deleting model 'Item'
-        db.delete_table('chars_item')
-
-        # Deleting model 'Spell'
-        db.delete_table('chars_spell')
+        # Deleting field 'Item.character_id'
+        db.delete_column('chars_item', 'character_id_id')
 
 
     models = {

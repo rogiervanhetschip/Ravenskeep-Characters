@@ -1,0 +1,117 @@
+<html>
+<head>
+<link rel="stylesheet" href="/media/css/charsheet.css" TYPE="text/css" media="screen, print" />
+</head>
+
+<body>
+<div class="blok">
+	<div class="blok, linksmain">
+		
+		<div class="clear">
+			<div class="linksstats">Naam karakter:</div>
+			<div>{{ char.character_naam }}</div>
+		</div>
+		
+		<div class="clear">
+			<div class="linksstats">Naam speler:</div>
+			<div>{{ char.speler.naam }}</div>
+		</div>
+		
+		<div class="clear">
+			<div class="linksstats">Ras:</div>
+			<div>{{ char.ras.naam }}</div>
+		</div>
+		
+		<div class="clear">
+			<div class="statkolom">
+				<div class="substatkolom">XP totaal:</div>
+				<div class="blok, substatkolom">{{ char.xp_totaal }}</div>
+			</div>
+			
+			<div class="statkolom">
+				<div class="substatkolom">XP besteed:</div>
+				<div class="blok, substatkolom">{{ char.xp_besteed }}</div>
+			</div>
+			
+			<div class="statkolom">
+				<div class="substatkolom">XP restant:</div>
+				<div class="blok, substatkolom">{{ char.xp_restant }}</div>
+			</div>
+			
+			<div class="statkolom">
+				<div class="substatkolom">Eerste live:</div>
+				<div class="blok, statkolom">{{ char.eerste_live }}</div>
+			</div>
+			
+			<div class="statkolom">
+				<div class="substatkolom">Lives overleefd:</div>
+				<div class="blok, substatkolom">{{ char.lives_overleefd }}</div>
+			</div>
+		</div>
+		
+		<div class="clear">
+			<div class="linksstats">Godsdienst:</div>
+			<div>{{ char.god.naam }}</div>
+		</div>
+		
+		<div class="blok">
+			<div>Vaardigheden:</div>
+			{% for skill in char.skills.all %}
+				<div class="substatkolom">
+					<div class="substatkolom">{{ skill.naam }}</div>
+					<div class="substatkolom">{{ skill.punten }}</div>
+				</div>
+			{% endfor %}
+		</div>
+		
+		<div class="blok">
+			<div>Bezittingen:</div>		
+			{% for item in char.items.all %}
+				{{ item.naam }}
+			{% endfor %}
+		</div>
+	
+	</div>
+	
+	<div class="blok, rechtsmain">
+		
+		<div class="blok, linkshitpoints">
+			<div>Hitpoints:<span class="blok, cijfer" /></div>
+			<div>Hoofddeksel:<span class="blok, cijfer" /></div>
+			<div>Beschermingspunten:<span class="blok, cijfer" /></div>
+			<div>Hitpoints: (per locatie)<span class="blok, cijfer" /></div>
+			<div>Mana: (per dag)<span class="blok, cijfer" /></div>
+		</div>
+		
+		<div class="blok, rechtshitpoints">
+			<div>Torso:</div>
+			<div>Arm links:</div>
+			<div>Arm rechts:</div>
+			<div>Been links:</div>
+			<div>Been rechts:</div>
+			<div>Mana:</div>
+		</div>
+		
+		<div class="blok, clear">
+			<div>Opmerkingen:</div>
+			<div>
+				<p>
+					{{ char.opmerkingen }}
+				</p>
+			</div>
+		</div>
+	
+	</div>
+	
+	{% if char.spreuken.count %}
+	<div class="clear, blok">
+		<div>Spreuken:</div>
+		{% for spreuk in char.spreuken.all %}
+			<div class="substatkolom">{{ spreuk.naam }} ({{ spreuk.niveau }})</div>
+		{% endfor %}
+	</div>
+	{% endif %}
+</div>
+</body>
+</html>
+

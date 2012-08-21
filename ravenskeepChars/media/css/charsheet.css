@@ -1,0 +1,67 @@
+.cijfer
+{
+  width: 20%;
+  float: left;
+}
+
+.blok
+{
+  border-width: 3px;
+  border-style: solid;
+  float: left;
+  width: 100%;
+  margin-left: -3px;
+}
+
+.linksmain
+{
+  width: 60%;
+  float: left;
+}
+
+.rechtsmain
+{
+  width: 40%;
+  float: left;
+}
+
+.linksstats
+{
+	width: 20%;
+	float: left;
+}
+
+.rechtsstats
+{
+	width: 80%;
+	float: left;
+}
+
+.statkolom
+{
+	width: 33%;
+	float: left;
+}
+
+.substatkolom
+{
+	width: 50%;
+	float: left;
+}
+
+.linkshitpoints
+{
+	width: 40%;
+	float: left;	
+}
+
+.rechtshitpoints
+{
+	width: 60%;
+	float: right;
+}
+
+.clear
+{
+	clear: both;
+}
