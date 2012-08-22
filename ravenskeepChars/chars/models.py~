@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib import admin
 from django.db.models import Sum
+import pdb
 
 class Character(models.Model):
     speler = models.ForeignKey('Player')
@@ -11,14 +12,15 @@ class Character(models.Model):
     hitpoints = models.PositiveIntegerField(default=1)
     mana = models.PositiveIntegerField(default=0)
     god = models.ForeignKey('God', null=True, blank=True)
-    skills = models.ManyToManyField('Skill', null=True, blank=True)
+    skills = models.ManyToManyField('Skill', null=True, blank=True, related_name='skills')
     opmerkingen = models.TextField(blank=True)
     x_factor = models.CharField(max_length=250, blank=True)
+    x_factor_skill = models.ForeignKey('Skill', null=True, blank=True, related_name='x_factor_skill')
     spreuken = models.ManyToManyField('Spell', null=True, blank=True)
     dood = models.BooleanField()
 
     def xp_totaal(self):
-        return 15 + self.lives_overleefd
+        return 15 + self.lives_overleefd + self.ras.xp_extra
 
     def xp_besteed(self):
         aggregate_skills = self.skills.aggregate(Sum('punten'))
@@ -70,6 +72,8 @@ class God(models.Model):
 
 class Race(models.Model):
     naam = models.CharField(max_length=50)
+    skill = models.ForeignKey('Skill', null=True, blank=True)
+    xp_extra = models.BooleanField()
 
     def __unicode__(self):
         return self.naam
@@ -100,10 +104,16 @@ class Spell(models.Model):
 class ItemInline(admin.TabularInline):
     model = Item
 
+class SkillInline(admin.TabularInline):
+    model = Race
+
 class CharacterAdmin(admin.ModelAdmin):
     inlines = [
         ItemInline,
     ]
 
+    list_display = ('character_naam', 'speler')
+
     readonly_fields = ('xp_totaal', 'xp_besteed', 'xp_restant', 'id')
+
 

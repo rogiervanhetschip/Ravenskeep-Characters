@@ -1,67 +1,113 @@
-.cijfer
+.totaal
 {
-  width: 20%;
+  display: block;
+  width: 100%;
   float: left;
+  height: 100%
 }
 
 .blok
 {
-  border-width: 3px;
-  border-style: solid;
-  float: left;
-  width: 100%;
-  left: -3px;
+  display: block;
+  border: 3px solid;
+  padding: 1px 1px 1px 1px;
+  margin: 5px 0 5px 5px;
+  overflow: auto;
+  width: 99%;
 }
 
 .linksmain
 {
+  display: block;
   width: 60%;
   float: left;
 }
 
 .rechtsmain
 {
+  display: block;
   width: 40%;
   float: left;
 }
 
 .linksstats
 {
-	width: 20%;
-	float: left;
+  display: block;
+  width: 20%;
+  float: left;
 }
 
 .rechtsstats
 {
-	width: 80%;
-	float: left;
+  display: block;
+  width: 80%;
+  float: left;
 }
 
 .statkolom
 {
-	width: 33%;
-	float: left;
+  display: block;
+  width: 33%;
+  float: left;
 }
 
 .substatkolom
 {
-	width: 50%;
-	float: left;
+  display: block;
+  width: 50%;
+  float: left;
 }
 
 .linkshitpoints
 {
-	width: 40%;
-	float: left;	
+  display: block;
+  width: 40%;
+  float: left;	
 }
+
+.statstekst
+{
+  display: block;
+  width: 70%;
+  float: left;
+}
+
+.hptekst
+{
+  display: block;
+  width: 50%;
+  float: left;
 
 .rechtshitpoints
 {
-	width: 60%;
-	float: right;
+  display: block;
+  width: 60%;
+  float: left;
+}
+
+.spreuken
+{
+  display: block;
+  width: 100%;
+  float: left;
+}
+
+.cijfer
+{
+  width: 20%;
+  float: left;
+  height: 12px;
+  border: 3px solid;
+}
+
+.smalcijfer
+{
+  width: 10%;
+  float: left;
+  height: 12px;
 }
 
 .clear
 {
-	clear: both;
+  clear: both;
 }
