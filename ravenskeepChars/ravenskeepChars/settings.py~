@@ -2,6 +2,7 @@
 
 import os
 import django
+import dj_database_url
 
 # calculated paths for django and the site
 # used as starting points for various other paths
@@ -12,7 +13,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    # ('Rogier van het Schip', 'rogiervanhetschip@gmail.com'),
 )
 
 MANAGERS = ADMINS
