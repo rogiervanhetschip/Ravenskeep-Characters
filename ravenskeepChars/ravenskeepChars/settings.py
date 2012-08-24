@@ -3,7 +3,6 @@
 import os
 import django
 import dj_database_url
-import pdb
 
 # calculated paths for django and the site
 # used as starting points for various other paths
@@ -21,8 +20,6 @@ MANAGERS = ADMINS
 
 DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
 
-pdb.set_trace()
-
 if bool(os.environ.get('LOCAL_DEV', False)):
     DATABASES = {
         'default': {
@@ -34,8 +31,6 @@ if bool(os.environ.get('LOCAL_DEV', False)):
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
-
-pdb.set_trace()
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
