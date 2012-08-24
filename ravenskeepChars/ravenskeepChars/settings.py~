@@ -12,7 +12,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    # ('Rogier van het Schip', 'rogiervanhetschip@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -131,6 +131,10 @@ INSTALLED_APPS = (
     'south',
     'chars',
 )
+
+LOGIN_URL = 'ravenskeepChars/login/'
+
+LOGIN_REDIRECT_URL = '/ravenskeepChars/'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

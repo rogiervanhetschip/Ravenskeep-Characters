@@ -6,5 +6,7 @@
 			<input type="text" name="charId" />
 			<button type="submit">Openen</button>
 		</form>
+		<a href="{% url chars.views.logout %}">Logout</a>
 	</body>
 </html>
+
