@@ -5,9 +5,8 @@
 
 <body>
 <div class="totaal">
-	<div class="blok">
 		<div class="linksmain">
-			<div class="blok">
+
 				
 				<div>
 					<div class="linksstats">Naam karakter:</div>
@@ -27,27 +26,27 @@
 				<div>
 					<div class="statkolom">
 						<div class="substatkolom">XP totaal:</div>
-						<div class="substatkolom"><div class="blok">{{ char.xp_totaal }}</div></div>
+						<div class="substatkolom">{{ char.xp_totaal }}</div>
 					</div>
 					
 					<div class="statkolom">
 						<div class="substatkolom">XP besteed:</div>
-						<div class="substatkolom"><div class="blok">{{ char.xp_besteed }}</div></div>
+						<div class="substatkolom">{{ char.xp_besteed }}</div>
 					</div>
 					
 					<div class="statkolom">
 						<div class="substatkolom">XP restant:</div>
-						<div class="substatkolom"><div class="blok">{{ char.xp_restant }}</div></div>
+						<div class="substatkolom">{{ char.xp_restant }}</div>
 					</div>
 					
 					<div class="statkolom">
 						<div class="substatkolom">Eerste live:</div>
-						<div class="statkolom"><div class="blok">{{ char.eerste_live }}</div></div>
+						<div class="statkolom">{{ char.eerste_live }}</div>
 					</div>
 					
 					<div class="statkolom">
 						<div class="substatkolom">Lives overleefd:</div>
-						<div class="substatkolom"><div class="blok">{{ char.lives_overleefd }}</div></div>
+						<div class="substatkolom">{{ char.lives_overleefd }}</div>
 					</div>
 				</div>
 				
@@ -55,9 +54,9 @@
 					<div class="linksstats">Godsdienst:</div>
 					<div>{{ char.god.naam }}</div>
 				</div>
-			</div>
+
 			
-			<div class="blok">
+			<div class="vaardigheden">
 				<div>Vaardigheden:</div>
 				{% for skill in char.skills.all %}
 					<div class="substatkolom">
@@ -75,81 +74,67 @@
 				<div class="substatkolom">Ras: +1 XP</div>
 				{% endif %}
 			</div>
+
 			
 			<div class="bezittingen">
-				<div class="blok">
-					<div>Bezittingen:</div>		
-					{% for item in char.item_set.all %}
-						<div class="substatkolom">{{ item.naam }}</div>
-					{% endfor %}
-				</div>
+				<div>Bezittingen:</div>		
+				{% for item in char.item_set.all %}
+					<div class="substatkolom">{{ item.naam }}</div>
+				{% endfor %}
+
 			</div>
-		
 		</div>
 		
-		<div class="rechtsmain">
-			<div class="blok">
-				
-				<div class="linkshitpoints">
-					<div class="blok">
-						<div><div class="hptekst">Hitpoints:</div><div class="cijfer"></div></div>
-						<div><div class="hptekst">Hoofddeksel:</div><div class="cijfer"></div></div>
-						<div><div class="hptekst">Beschermingspunten:</div><div class="cijfer"></div></div>
-						<div><div class="statstekst">Hitpoints: (per locatie)</div><div class="cijfer"></div></div>
-						<div><div class="statstekst">Mana: (per dag)</div><div class="cijfer"></div></div>
-					</div>
-				</div>
-				
-				<div class="rechtshitpoints">
-					<div class="blok">
-						<div>Torso:</div>
-						<div>Arm links:</div>
-						<div>Arm rechts:</div>
-						<div>Been links:</div>
-						<div>Been rechts:</div>
-						<div>Mana:</div>
-					</div>
-				</div>		
-	
-				<div class="clear">
-					<div class="blok">
-						<div>Opmerkingen:</div>
-						<div>
-							<p>
-								{{ char.opmerkingen|linebreaks }}
-							</p>
-						</div>
-					</div>
-				</div>
-				{% if char.x_factor %}
-				<div class="clear">
-					<div class="blok">
-						<div>X-Factor:</div>
-						<div>
-							<p>
-								{{ char.x_factor }}
-							</p>
-						</div>
-						</div>
-				</div>
-				{% endif %}
-			
+		<div class="hitpoints">
+			<div class="totalhitpoints">
+					<div><div class="statstekst">Hitpoints:</div><div class="cijfer"></div></div>
+					<div><div class="statstekst">Hoofddeksel:</div><div class="cijfer"></div></div>
+					<div><div class="statstekst">Beschermingspunten:</div><div class="cijfer"></div></div>
+					<div><div class="statstekst">Hitpoints: (per locatie)</div><div class="cijfer"></div></div>
+					<div><div class="statstekst">Mana: (per dag)</div><div class="cijfer"></div></div>
 			</div>
+			
+			<div class="currenthitpoints">
+					<div>Torso:</div>
+					<div>Arm links:</div>
+					<div>Arm rechts:</div>
+					<div>Been links:</div>
+					<div>Been rechts:</div>
+					<div>Mana:</div>
+			</div>		
+
+			<div class="clear">
+					<div>Opmerkingen:</div>
+					<div>
+						<p>
+							{{ char.opmerkingen|linebreaks }}
+						</p>
+					</div>
+			</div>
+			
+			{% if char.x_factor %}
+			<div class="clear">
+					<div>X-Factor:</div>
+					<div>
+						<p>
+							{{ char.x_factor }}
+						</p>
+					</div>
+			</div>
+			{% endif %}
 		</div>
 		
 		{% if char.spreuken.count %}
 		<div class="clear">
-			<div class="spreuken">
-				<div class="blok">
-					<div>Spreuken:</div>
-					{% for spreuk in char.spreuken.all %}
-						<div class="substatkolom">{{ spreuk.naam }} ({{ spreuk.niveau }})</div>
-					{% endfor %}
-				</div>
-			</div>
+		</div>
+		<div class="spreuken">
+				<div>Spreuken:</div>
+				{% for spreuk in char.spreuken.all %}
+					<div class="spreuk">{{ spreuk.naam }} ({{ spreuk.niveau }})</div>
+				{% endfor %}
+
 		</div>
 		{% endif %}
-	</div>
 </div>
 </body>
 </html>

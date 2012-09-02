@@ -3,31 +3,16 @@
   display: block;
   width: 100%;
   float: left;
-  height: 100%
-}
-
-.blok
-{
-  display: block;
-  border: 3px solid;
-  padding: 1px 1px 1px 1px;
-  margin: 5px 0 5px 5px;
-  overflow: auto;
-  width: 99%;
+  height: 100%;
+  border: 1px solid;
 }
 
 .linksmain
 {
   display: block;
-  width: 60%;
+  width: 59%;
   float: left;
-}
-
-.rechtsmain
-{
-  display: block;
-  width: 40%;
-  float: left;
+  border: 1px solid;
 }
 
 .linksstats
@@ -40,7 +25,7 @@
 .rechtsstats
 {
   display: block;
-  width: 80%;
+  width: 75%;
   float: left;
 }
 
@@ -58,11 +43,30 @@
   float: left;
 }
 
-.linkshitpoints
+.hitpoints
 {
   display: block;
-  width: 40%;
-  float: left;	
+  width: 39%;
+  float: right;
+  border: 1px solid;
+}
+
+.totalhitpoints
+{
+  display: block;
+  width: 60%;
+  float: left;
+  border: 1px solid;
+  margin-left: -1px;
+}
+
+.currenthitpoints
+{
+  display: block;
+  margin-right: -1px;
+  width: 39%;
+  float: right;
+  border: 1px solid;
 }
 
 .statstekst
@@ -79,18 +83,37 @@
   float: left;
 }
 
-.rechtshitpoints
-{
-  display: block;
-  width: 60%;
-  float: left;
-}
-
 .spreuken
 {
   display: block;
-  width: 100%;
+  width: 99.7%;
   float: left;
+  border: 1px solid;
+}
+
+.spreuk
+{
+  display: block;
+  width: 33%;
+  float: left;
+}
+
+.bezittingen
+{
+	border: 1px solid;
+	display: block;
+	float: left;
+	width: 100%;
+	margin-left: -1px;
+}
+
+.vaardigheden
+{
+	border: 1px solid;
+	display: block;
+	float: left;
+	width: 100%;
+	margin-left: -1px;
 }
 
 .cijfer
@@ -98,7 +121,7 @@
   width: 20%;
   float: left;
   height: 12px;
-  border: 3px solid;
+  border: 1px solid;
 }
 
 .smalcijfer
@@ -106,6 +129,7 @@
   width: 10%;
   float: left;
   height: 12px;
+  border: 1px solid;
 }
 
 .clear
