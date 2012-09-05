@@ -45,14 +45,14 @@
 					</div>
 					
 					<div class="statkolom">
-						<div class="substatkolom">Lives overleefd:</div>
-						<div class="substatkolom">{{ char.lives_overleefd }}</div>
+						<div class="substatkolom">Live #:</div>
+						<div class="substatkolom">{{ char.live_nr }}</div>
 					</div>
 				</div>
 				
 				<div class="clear">
 					<div class="linksstats">Godsdienst:</div>
-					<div>{{ char.god.naam }}</div>
+					<div>{{ char.god.naam }}{% if char.subgod %}( Subgod: {{ char.subgod.naam }} )</div>
 				</div>
 
 			
@@ -130,7 +130,7 @@
 		<div class="spreuken">
 				<div>Spreuken:</div>
 				{% for spreuk in char.spreuken.all %}
-					<div class="spreuk">{{ spreuk.naam }} ({{ spreuk.niveau }})</div>
+					<div class="spreuk">{{ spreuk.naam }} (niveau {{ spreuk.niveau }}, {{ spreuk.mana }} mana)</div>
 				{% endfor %}
 
 		</div>

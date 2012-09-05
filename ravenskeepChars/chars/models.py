@@ -8,10 +8,11 @@ class Character(models.Model):
     character_naam = models.CharField(max_length=50)
     ras = models.ForeignKey('Race')
     eerste_live = models.PositiveIntegerField(default=31)
-    lives_overleefd = models.PositiveIntegerField(default=1)
+    live_nr = models.PositiveIntegerField(default=1)
     hitpoints = models.PositiveIntegerField(default=1)
     mana = models.PositiveIntegerField(default=0)
     god = models.ForeignKey('God', null=True, blank=True)
+    subgod = models.ForeignKey('God', null=True, blank=True, related_name='subgod_character')
     skills = models.ManyToManyField('Skill', null=True, blank=True, related_name='skills')
     opmerkingen = models.TextField(blank=True)
     x_factor = models.CharField(max_length=250, blank=True)
@@ -20,11 +21,20 @@ class Character(models.Model):
     dood = models.BooleanField()
 
     def xp_totaal(self):
-        return 15 + self.lives_overleefd + self.ras.xp_extra
+        return 15 + self.live_nr - 1 + self.ras.xp_extra
 
     def xp_besteed(self):
+        return self.xp_besteed_skills + self.xp_besteed_spreuken + self.xp_besteed_recepten
+
+    def xp_besteed_skills(self):
         aggregate_skills = self.skills.aggregate(Sum('punten'))
         return aggregate_skills['punten__sum']
+
+    def xp_besteed_recepten(self):
+        return 0
+
+    def xp_besteed_spreuken(self):
+        return 0
 
     def xp_restant(self):
         return self.xp_totaal() - self.xp_besteed()
@@ -94,6 +104,8 @@ class Item(models.Model):
 class Spell(models.Model):
     naam = models.CharField(max_length=50)
     niveau = models.PositiveIntegerField()
+    xp = models.PositiveIntegerField()
+    mana = models.PositiveIntegerField()
 
     def __unicode__(self):
         return self.naam + " (" + str(self.niveau) + ")"
