@@ -26,17 +26,17 @@
 				<div>
 					<div class="statkolom">
 						<div class="substatkolom">XP totaal:</div>
-						<div class="substatkolom">{{ char.xp_totaal }}</div>
+						<div class="substatkolom">{{ char.xp_total }}</div>
 					</div>
 					
 					<div class="statkolom">
 						<div class="substatkolom">XP besteed:</div>
-						<div class="substatkolom">{{ char.xp_besteed }}</div>
+						<div class="substatkolom">{{ char.xp_spent }}</div>
 					</div>
 					
 					<div class="statkolom">
 						<div class="substatkolom">XP restant:</div>
-						<div class="substatkolom">{{ char.xp_restant }}</div>
+						<div class="substatkolom">{{ char.xp_remaining }}</div>
 					</div>
 					
 					<div class="statkolom">
@@ -124,13 +124,25 @@
 			{% endif %}
 		</div>
 		
-		{% if char.spreuken.count %}
+		{% if char.mage_spells.count %}
 		<div class="clear">
 		</div>
 		<div class="spreuken">
-				<div>Spreuken:</div>
-				{% for spreuk in char.spreuken.all %}
-					<div class="spreuk">{{ spreuk.naam }} (niveau {{ spreuk.niveau }}, {{ spreuk.mana }} mana)</div>
+				<div>Magier spreuken:</div>
+				{% for spell in char.mage_spells.all %}
+					<div class="spreuk">{{ spell.naam }} (niveau {{ spell.niveau }}, {{ spell.mana }} mana)</div>
+				{% endfor %}
+
+		</div>
+		{% endif %}
+
+		{% if char.priest_spells.count %}
+		<div class="clear">
+		</div>
+		<div class="spreuken">
+				<div>Priester spreuken:</div>
+				{% for spell in char.priest_spells.all %}
+					<div class="spreuk">{{ spell.naam }} (niveau {{ spell.niveau }}, {{ spell.mana }} mana)</div>
 				{% endfor %}
 
 		</div>

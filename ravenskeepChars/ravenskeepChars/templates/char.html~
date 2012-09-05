@@ -46,7 +46,7 @@
 					
 					<div class="statkolom">
 						<div class="substatkolom">Live #:</div>
-						<div class="substatkolom">{{ char.lives_overleefd }}</div>
+						<div class="substatkolom">{{ char.live_nr }}</div>
 					</div>
 				</div>
 				
@@ -124,13 +124,25 @@
 			{% endif %}
 		</div>
 		
-		{% if char.spreuken.count %}
+		{% if char.mage_spells.count %}
 		<div class="clear">
 		</div>
 		<div class="spreuken">
-				<div>Spreuken:</div>
-				{% for spreuk in char.spreuken.all %}
-					<div class="spreuk">{{ spreuk.naam }} (niveau {{ spreuk.niveau }}, {{ spreuk.mana }} mana)</div>
+				<div>Magier spreuken:</div>
+				{% for spell in char.mage_spells.all %}
+					<div class="spreuk">{{ spell.naam }} (niveau {{ spell.niveau }}, {{ spell.mana }} mana)</div>
+				{% endfor %}
+
+		</div>
+		{% endif %}
+
+		{% if char.priest_spells.count %}
+		<div class="clear">
+		</div>
+		<div class="spreuken">
+				<div>Priester spreuken:</div>
+				{% for spell in char.priest_spells.all %}
+					<div class="spreuk">{{ spell.naam }} (niveau {{ spell.niveau }}, {{ spell.mana }} mana)</div>
 				{% endfor %}
 
 		</div>

@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib import admin
 from django.db.models import Sum
 import pdb
+from abc import ABCMeta
 
 class Character(models.Model):
     speler = models.ForeignKey('Player')
@@ -18,26 +19,31 @@ class Character(models.Model):
     x_factor = models.CharField(max_length=250, blank=True)
     x_factor_skill = models.ForeignKey('Skill', null=True, blank=True, related_name='x_factor_skill')
     spreuken = models.ManyToManyField('Spell', null=True, blank=True)
+    mage_spells = models.ManyToManyField('MageSpell', null=True, blank=True, related_name='MageSpells')
+    priest_spells = models.ManyToManyField('PriestSpell', null=True, blank=True, related_name='Priest_Spells')
     dood = models.BooleanField()
 
-    def xp_totaal(self):
+    def xp_total(self):
         return 15 + self.live_nr - 1 + self.ras.xp_extra
 
-    def xp_besteed(self):
-        return self.xp_besteed_skills + self.xp_besteed_spreuken + self.xp_besteed_recepten
+    def xp_spent(self):
+        return self.xp_spent_skills + self.xp_spent_mage_spells + self.xp_spent_priest_spells + self.xp_spent_recipes
 
-    def xp_besteed_skills(self):
+    def xp_spent_skills(self):
         aggregate_skills = self.skills.aggregate(Sum('punten'))
         return aggregate_skills['punten__sum']
 
-    def xp_besteed_recepten(self):
+    def xp_spent_recipes(self):
         return 0
 
-    def xp_besteed_spreuken(self):
+    def xp_besteed_mage_spells(self):
         return 0
 
-    def xp_restant(self):
-        return self.xp_totaal() - self.xp_besteed()
+    def xp_besteed_priest_spells(self):
+        return 0
+
+    def xp_remaining(self):
+        return self.xp_total() - self.xp_spent()
 
     def __unicode__(self):
         return self.character_naam
@@ -113,6 +119,12 @@ class Spell(models.Model):
     class Meta:
         ordering = ['naam', 'niveau']
 
+class PriestSpell(Spell):
+    pass
+
+class MageSpell(Spell):
+    pass
+
 class ItemInline(admin.TabularInline):
     model = Item
 
@@ -126,6 +138,6 @@ class CharacterAdmin(admin.ModelAdmin):
 
     list_display = ('character_naam', 'speler')
 
-    readonly_fields = ('xp_totaal', 'xp_besteed', 'xp_restant', 'id')
+    readonly_fields = ('xp_total', 'xp_spent', 'xp_remaining', 'id')
 
 
