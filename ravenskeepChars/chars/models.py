@@ -24,7 +24,7 @@ class Character(models.Model):
     dood = models.BooleanField()
 
     def xp_total(self):
-        return 15 + self.live_nr - 1 + self.ras.xp_extra
+        return 14 + self.live_nr + self.ras.xp_extra
 
     def xp_spent(self):
         return self.xp_spent_skills + self.xp_spent_mage_spells + self.xp_spent_priest_spells + self.xp_spent_recipes
@@ -36,14 +36,60 @@ class Character(models.Model):
     def xp_spent_recipes(self):
         return 0
 
-    def xp_besteed_mage_spells(self):
+    def xp_spent_mage_spells(self):
         return 0
 
-    def xp_besteed_priest_spells(self):
+    def xp_spent_priest_spells(self):
         return 0
 
     def xp_remaining(self):
         return self.xp_total() - self.xp_spent()
+
+    def hitpoints(self):
+        hp_count = { 1 : 1,
+                     2 : 1,
+                     3 : 2,
+                     4 : 2,
+                     5 : 2,
+                     6 : 3,
+                     7 : 3,
+                     8 : 3,
+                     9 : 3,
+                    10 : 4,
+                    11 : 4,
+                    12 : 4,
+                    13 : 4,
+                    14 : 4,
+                    15 : 5,
+                    16 : 5,
+                    17 : 5,
+                    18 : 5,
+                    19 : 5,
+                    20 : 5,
+                    21 : 6,
+                    22 : 6,
+                    23 : 6,
+                    24 : 6,
+                    25 : 6,
+                    26 : 6,
+                    27 : 6,
+                    28 : 7,
+                    29 : 7,
+                    30 : 7,
+                    31 : 7,
+                    32 : 7,
+                    33 : 7,
+                    34 : 7,
+                    35 : 7,
+                    36 : 8,
+                    37 : 8,
+                    38 : 8,
+                    39 : 8,
+        }
+        return hp_count[self.live_nr]
+
+    def mana(self):
+        return 5 + self.live_nr
 
     def __unicode__(self):
         return self.character_naam
@@ -138,6 +184,6 @@ class CharacterAdmin(admin.ModelAdmin):
 
     list_display = ('character_naam', 'speler')
 
-    readonly_fields = ('xp_total', 'xp_spent', 'xp_remaining', 'id')
+    readonly_fields = ('id', 'xp_total', 'xp_spent', 'xp_remaining', 'hitpoints', 'mana')
 
 

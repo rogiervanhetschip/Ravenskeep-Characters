@@ -26,17 +26,17 @@
 				<div>
 					<div class="statkolom">
 						<div class="substatkolom">XP totaal:</div>
-						<div class="substatkolom">{{ char.xp_totaal }}</div>
+						<div class="substatkolom">{{ char.xp_total }}</div>
 					</div>
 					
 					<div class="statkolom">
 						<div class="substatkolom">XP besteed:</div>
-						<div class="substatkolom">{{ char.xp_besteed }}</div>
+						<div class="substatkolom">{{ char.xp_spent }}</div>
 					</div>
 					
 					<div class="statkolom">
 						<div class="substatkolom">XP restant:</div>
-						<div class="substatkolom">{{ char.xp_restant }}</div>
+						<div class="substatkolom">{{ char.xp_remaining }}</div>
 					</div>
 					
 					<div class="statkolom">
@@ -52,7 +52,7 @@
 				
 				<div class="clear">
 					<div class="linksstats">Godsdienst:</div>
-					<div>{{ char.god.naam }}{% if char.subgod %}( Subgod: {{ char.subgod.naam }} )</div>
+					<div>{{ char.god.naam }}{% if char.subgod %}( Subgod: {{ char.subgod.naam }} ){% endif %}</div>
 				</div>
 
 			
