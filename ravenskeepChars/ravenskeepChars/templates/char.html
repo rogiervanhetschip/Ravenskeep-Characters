@@ -132,7 +132,6 @@
 				{% for spell in char.mage_spells.all %}
 					<div class="spreuk">{{ spell.naam }} (niveau {{ spell.niveau }}, {{ spell.mana }} mana)</div>
 				{% endfor %}
-
 		</div>
 		{% endif %}
 
@@ -144,7 +143,17 @@
 				{% for spell in char.priest_spells.all %}
 					<div class="spreuk">{{ spell.naam }} (niveau {{ spell.niveau }}, kost {{ spell.mana }} mana)</div>
 				{% endfor %}
+		</div>
+		{% endif %}
 
+		{% if char.recipes.count %}
+		<div class="clear">
+		</div>
+		<div class="spreuken">
+				<div>Recepten:</div>
+				{% for recipe in char.recipes.all %}
+					<div class="spreuk">{{ recipe.name }} ({{ recipe.code }})</div>
+				{% endfor %}
 		</div>
 		{% endif %}
 </div>

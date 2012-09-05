@@ -21,25 +21,29 @@ class Character(models.Model):
     spreuken = models.ManyToManyField('Spell', null=True, blank=True)
     mage_spells = models.ManyToManyField('MageSpell', null=True, blank=True, related_name='MageSpells')
     priest_spells = models.ManyToManyField('PriestSpell', null=True, blank=True, related_name='Priest_Spells')
+    recipes = models.ManyToManyField('Recipe', null=True, blank=True)
     dood = models.BooleanField()
 
     def xp_total(self):
         return 14 + self.live_nr + self.ras.xp_extra
 
     def xp_spent(self):
-        return self.xp_spent_skills + self.xp_spent_mage_spells + self.xp_spent_priest_spells + self.xp_spent_recipes
+        return self.xp_spent_skills() + self.xp_spent_mage_spells() + self.xp_spent_priest_spells() + self.xp_spent_recipes()
 
     def xp_spent_skills(self):
         aggregate_skills = self.skills.aggregate(Sum('punten'))
         return aggregate_skills['punten__sum']
 
     def xp_spent_recipes(self):
+        recipe_count = self.recipes.count()
+        aggregate_recipes = self.skills.aggregate(Sum('free_recipes'))
+        pdb.set_trace()
+        return max(recipe_count - aggregate_recipes['free_recipes__sum'], 0)
+
+    def xp_spent_mage_spells(self):
         return 0
 
-    def xp_besteed_mage_spells(self):
-        return 0
-
-    def xp_besteed_priest_spells(self):
+    def xp_spent_priest_spells(self):
         return 0
 
     def xp_remaining(self):
@@ -110,12 +114,10 @@ class Player(models.Model):
     def __unicode__(self):
         return self.naam()
 
-    class Meta:
-        ordering = ['achternaam', 'voornaam']    
-
 class Skill(models.Model):
     naam = models.CharField(max_length=50)
     punten = models.PositiveIntegerField()
+    free_recipes = models.PositiveIntegerField()
 
     def __unicode__(self):
         return self.naam
@@ -170,6 +172,13 @@ class PriestSpell(Spell):
 
 class MageSpell(Spell):
     pass
+
+class Recipe(models.Model):
+    name = models.CharField(max_length=50)
+    code = models.CharField(max_length=5)
+
+    def __unicode__(self):
+        return self.name + " (" + self.code + ")"
 
 class ItemInline(admin.TabularInline):
     model = Item

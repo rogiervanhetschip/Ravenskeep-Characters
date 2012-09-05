@@ -132,7 +132,6 @@
 				{% for spell in char.mage_spells.all %}
 					<div class="spreuk">{{ spell.naam }} (niveau {{ spell.niveau }}, {{ spell.mana }} mana)</div>
 				{% endfor %}
-
 		</div>
 		{% endif %}
 
@@ -142,9 +141,8 @@
 		<div class="spreuken">
 				<div>Priester spreuken:</div>
 				{% for spell in char.priest_spells.all %}
-					<div class="spreuk">{{ spell.naam }} (niveau {{ spell.niveau }}, {{ spell.mana }} mana)</div>
+					<div class="spreuk">{{ spell.naam }} (niveau {{ spell.niveau }}, kost {{ spell.mana }} mana)</div>
 				{% endfor %}
-
 		</div>
 		{% endif %}
 </div>
