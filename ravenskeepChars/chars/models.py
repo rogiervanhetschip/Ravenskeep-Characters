@@ -43,6 +43,7 @@ class Character(models.Model):
         return 0
 
     def xp_spent_priest_spells(self):
+        # Duurste van ieder level waar je recht op hebt eruit halen
         return 0
 
     def xp_remaining(self):
@@ -89,7 +90,8 @@ class Character(models.Model):
                     38 : 8,
                     39 : 8,
         }
-        return hp_count[self.live_nr]
+        extra_hp = self.skills.aggregate(Sum('extra_hp'))
+        return hp_count[self.live_nr] + extra_hp
 
     def mana(self):
         return 5 + self.live_nr
@@ -116,7 +118,11 @@ class Player(models.Model):
 class Skill(models.Model):
     naam = models.CharField(max_length=50)
     punten = models.PositiveIntegerField()
-    free_recipes = models.PositiveIntegerField()
+    free_recipes = models.PositiveIntegerField(default=0)
+    extra_hitpoints = models.PositiveIntegerField(default=0)
+    free_123_spells = models.PositiveIntegerField(default=0)
+    free_456_spells = models.PositiveIntegerField(default=0)
+    free_789_spells = models.PositiveIntegerField(default=0)
 
     def __unicode__(self):
         return self.naam
