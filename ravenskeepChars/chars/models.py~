@@ -43,7 +43,7 @@ class Character(models.Model):
         return 0
 
     def xp_spent_priest_spells(self):
-#        max(self.skills.filter()).id
+        # Duurste van ieder level waar je recht op hebt eruit halen
         return 0
 
     def xp_remaining(self):

@@ -90,7 +90,7 @@ class Character(models.Model):
                     38 : 8,
                     39 : 8,
         }
-        extra_hp = self.skills.aggregate(Sum('extra_hp'))
+        extra_hp = self.skills.aggregate(Sum('extra_hitpoints'))
         return hp_count[self.live_nr] + extra_hp
 
     def mana(self):
