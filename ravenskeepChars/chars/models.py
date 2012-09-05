@@ -2,32 +2,99 @@ from django.db import models
 from django.contrib import admin
 from django.db.models import Sum
 import pdb
+from abc import ABCMeta
 
 class Character(models.Model):
     speler = models.ForeignKey('Player')
     character_naam = models.CharField(max_length=50)
     ras = models.ForeignKey('Race')
     eerste_live = models.PositiveIntegerField(default=31)
-    lives_overleefd = models.PositiveIntegerField(default=1)
+    live_nr = models.PositiveIntegerField(default=1)
     hitpoints = models.PositiveIntegerField(default=1)
     mana = models.PositiveIntegerField(default=0)
     god = models.ForeignKey('God', null=True, blank=True)
+    subgod = models.ForeignKey('God', null=True, blank=True, related_name='subgod_character')
     skills = models.ManyToManyField('Skill', null=True, blank=True, related_name='skills')
     opmerkingen = models.TextField(blank=True)
     x_factor = models.CharField(max_length=250, blank=True)
     x_factor_skill = models.ForeignKey('Skill', null=True, blank=True, related_name='x_factor_skill')
     spreuken = models.ManyToManyField('Spell', null=True, blank=True)
+    mage_spells = models.ManyToManyField('MageSpell', null=True, blank=True, related_name='MageSpells')
+    priest_spells = models.ManyToManyField('PriestSpell', null=True, blank=True, related_name='Priest_Spells')
+    recipes = models.ManyToManyField('Recipe', null=True, blank=True)
     dood = models.BooleanField()
 
-    def xp_totaal(self):
-        return 15 + self.lives_overleefd + self.ras.xp_extra
+    def xp_total(self):
+        return 14 + self.live_nr + self.ras.xp_extra
 
-    def xp_besteed(self):
+    def xp_spent(self):
+        return self.xp_spent_skills() + self.xp_spent_mage_spells() + self.xp_spent_priest_spells() + self.xp_spent_recipes()
+
+    def xp_spent_skills(self):
         aggregate_skills = self.skills.aggregate(Sum('punten'))
         return aggregate_skills['punten__sum']
 
-    def xp_restant(self):
-        return self.xp_totaal() - self.xp_besteed()
+    def xp_spent_recipes(self):
+        recipe_count = self.recipes.count()
+        aggregate_recipes = self.skills.aggregate(Sum('free_recipes'))
+        return max(recipe_count - aggregate_recipes['free_recipes__sum'], 0)
+
+    def xp_spent_mage_spells(self):
+        return 0
+
+    def xp_spent_priest_spells(self):
+        # Duurste van ieder level waar je recht op hebt eruit halen
+        return 0
+
+    def xp_remaining(self):
+        return self.xp_total() - self.xp_spent()
+
+    def hitpoints(self):
+        hp_count = { 1 : 1,
+                     2 : 1,
+                     3 : 2,
+                     4 : 2,
+                     5 : 2,
+                     6 : 3,
+                     7 : 3,
+                     8 : 3,
+                     9 : 3,
+                    10 : 4,
+                    11 : 4,
+                    12 : 4,
+                    13 : 4,
+                    14 : 4,
+                    15 : 5,
+                    16 : 5,
+                    17 : 5,
+                    18 : 5,
+                    19 : 5,
+                    20 : 5,
+                    21 : 6,
+                    22 : 6,
+                    23 : 6,
+                    24 : 6,
+                    25 : 6,
+                    26 : 6,
+                    27 : 6,
+                    28 : 7,
+                    29 : 7,
+                    30 : 7,
+                    31 : 7,
+                    32 : 7,
+                    33 : 7,
+                    34 : 7,
+                    35 : 7,
+                    36 : 8,
+                    37 : 8,
+                    38 : 8,
+                    39 : 8,
+        }
+        extra_hp = self.skills.aggregate(Sum('extra_hp'))
+        return hp_count[self.live_nr] + extra_hp
+
+    def mana(self):
+        return 5 + self.live_nr
 
     def __unicode__(self):
         return self.character_naam
@@ -48,12 +115,14 @@ class Player(models.Model):
     def __unicode__(self):
         return self.naam()
 
-    class Meta:
-        ordering = ['achternaam', 'voornaam']    
-
 class Skill(models.Model):
     naam = models.CharField(max_length=50)
     punten = models.PositiveIntegerField()
+    free_recipes = models.PositiveIntegerField(default=0)
+    extra_hitpoints = models.PositiveIntegerField(default=0)
+    free_123_spells = models.PositiveIntegerField(default=0)
+    free_456_spells = models.PositiveIntegerField(default=0)
+    free_789_spells = models.PositiveIntegerField(default=0)
 
     def __unicode__(self):
         return self.naam
@@ -94,12 +163,27 @@ class Item(models.Model):
 class Spell(models.Model):
     naam = models.CharField(max_length=50)
     niveau = models.PositiveIntegerField()
+    xp = models.PositiveIntegerField()
+    mana = models.PositiveIntegerField()
 
     def __unicode__(self):
         return self.naam + " (" + str(self.niveau) + ")"
 
     class Meta:
         ordering = ['naam', 'niveau']
+
+class PriestSpell(Spell):
+    pass
+
+class MageSpell(Spell):
+    pass
+
+class Recipe(models.Model):
+    name = models.CharField(max_length=50)
+    code = models.CharField(max_length=5)
+
+    def __unicode__(self):
+        return self.name + " (" + self.code + ")"
 
 class ItemInline(admin.TabularInline):
     model = Item
@@ -114,6 +198,6 @@ class CharacterAdmin(admin.ModelAdmin):
 
     list_display = ('character_naam', 'speler')
 
-    readonly_fields = ('xp_totaal', 'xp_besteed', 'xp_restant', 'id')
+    readonly_fields = ('id', 'xp_total', 'xp_spent', 'xp_remaining', 'hitpoints', 'mana')
 
 
