@@ -1,9 +1,8 @@
 from django.db import models
 from django.contrib import admin
 from django.db.models import Sum
-from django.forms.widgets import CheckboxSelectMultiple
+from django.forms.widgets import CheckboxSelectMultiple, SelectMultiple
 import pdb
-from abc import ABCMeta
 
 class Character(models.Model):
     speler = models.ForeignKey('Player')
@@ -215,8 +214,10 @@ class CharacterAdmin(admin.ModelAdmin):
     list_display = ('character_naam', 'speler')
 
     readonly_fields = ('id', 'xp_total', 'xp_spent', 'xp_remaining', 'hitpoints', 'mana')
-    
+
     formfield_overrides = {
-        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
+        models.ManyToManyField: { 'widget': SelectMultiple(attrs={'style':'height: 200px'}) },
+#        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
+#ChosenSelectMultiple
     }
 
