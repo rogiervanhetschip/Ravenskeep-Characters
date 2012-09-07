@@ -45,8 +45,20 @@ class Character(models.Model):
         return max(aggregate_mage_spells['xp__sum'], 0)
 
     def xp_spent_priest_spells(self):
-        # Remove most expensive of each level you're allowed to have, sum the rest
-        return 0
+        xp = 0
+        spell_groups = [[1, 4, 'free_123_spells'], [4, 7, 'free_456_spells'], [7, 10, 'free_789_spells']]
+        for spell_group in spell_groups:
+            for level in range(spell_group[0], spell_group[1]):
+                # Find all spells of appropriate level, order by xp
+                spells = self.priest_spells.filter(niveau=level).order_by('xp').reverse()
+                number_of_free_spells = self.skills.aggregate(Sum(spell_group[2]))[spell_group[2]+'__sum']
+                # Remove most expensive of each level you're allowed to have
+                if(number_of_free_spells > 0):
+                    spells = spells[number_of_free_spells:].annotate()
+                # Sum the rest
+                pdb.set_trace()
+                xp += max(spells.aggregate(Sum('xp'))['xp__sum'], 0)
+        return xp
 
     def xp_remaining(self):
         return self.xp_total() - self.xp_spent()
@@ -203,5 +215,6 @@ class CharacterAdmin(admin.ModelAdmin):
     list_display = ('character_naam', 'speler')
 
     readonly_fields = ('id', 'xp_total', 'xp_spent', 'xp_remaining', 'hitpoints', 'mana')
+
 
 
