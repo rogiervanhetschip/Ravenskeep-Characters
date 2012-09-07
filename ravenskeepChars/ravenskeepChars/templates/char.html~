@@ -61,7 +61,7 @@
 				{% for skill in char.skills.all %}
 					<div class="substatkolom">
 						<div class="substatkolom">{{ skill.naam }}</div>
-						<div class="substatkolom">{{ skill.punten }}</div>
+						<div class="substatkolom">{{ skill.xp }}</div>
 					</div>
 				{% endfor %}
 				{% if char.x_factor_skill %}
@@ -142,6 +142,17 @@
 				<div>Priester spreuken:</div>
 				{% for spell in char.priest_spells.all %}
 					<div class="spreuk">{{ spell.naam }} (niveau {{ spell.niveau }}, kost {{ spell.mana }} mana)</div>
+				{% endfor %}
+		</div>
+		{% endif %}
+
+		{% if char.recipes.count %}
+		<div class="clear">
+		</div>
+		<div class="spreuken">
+				<div>Recepten:</div>
+				{% for recipe in char.recipes.all %}
+					<div class="spreuk">{{ recipe.name }} ({{ recipe.code }})</div>
 				{% endfor %}
 		</div>
 		{% endif %}
