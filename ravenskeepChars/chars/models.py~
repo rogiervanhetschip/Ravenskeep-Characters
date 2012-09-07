@@ -23,16 +23,17 @@ class Character(models.Model):
     priest_spells = models.ManyToManyField('PriestSpell', null=True, blank=True, related_name='Priest_Spells')
     recipes = models.ManyToManyField('Recipe', null=True, blank=True)
     dood = models.BooleanField()
+    leermeesterpunten = models.PositiveIntegerField(default=0)
 
     def xp_total(self):
-        return 14 + self.live_nr + self.ras.xp_extra
+        return 14 + self.live_nr + self.ras.xp_extra + self.leermeesterpunten
 
     def xp_spent(self):
         return self.xp_spent_skills() + self.xp_spent_mage_spells() + self.xp_spent_priest_spells() + self.xp_spent_recipes()
 
     def xp_spent_skills(self):
-        aggregate_skills = self.skills.aggregate(Sum('punten'))
-        return aggregate_skills['punten__sum']
+        aggregate_skills = self.skills.aggregate(Sum('xp'))
+        return aggregate_skills['xp__sum']
 
     def xp_spent_recipes(self):
         recipe_count = self.recipes.count()
@@ -40,10 +41,11 @@ class Character(models.Model):
         return max(recipe_count - aggregate_recipes['free_recipes__sum'], 0)
 
     def xp_spent_mage_spells(self):
-        return 0
+        aggregate_mage_spells = self.mage_spells.aggregate(Sum('xp'))
+        return max(aggregate_mage_spells['xp__sum'], 0)
 
     def xp_spent_priest_spells(self):
-        # Duurste van ieder level waar je recht op hebt eruit halen
+        # Remove most expensive of each level you're allowed to have, sum the rest
         return 0
 
     def xp_remaining(self):
@@ -90,11 +92,12 @@ class Character(models.Model):
                     38 : 8,
                     39 : 8,
         }
-        extra_hp = self.skills.aggregate(Sum('extra_hp'))
-        return hp_count[self.live_nr] + extra_hp
+        aggregate_hitpoints = self.skills.aggregate(Sum('extra_hitpoints'))
+        return hp_count[self.live_nr] + aggregate_hitpoints['extra_hitpoints__sum']
 
     def mana(self):
-        return 5 + self.live_nr
+        aggregate_mana = self.skills.aggregate(Sum('extra_mana'))
+        return 5 + self.live_nr + aggregate_mana['extra_mana__sum']
 
     def __unicode__(self):
         return self.character_naam
@@ -117,12 +120,13 @@ class Player(models.Model):
 
 class Skill(models.Model):
     naam = models.CharField(max_length=50)
-    punten = models.PositiveIntegerField()
-    free_recipes = models.PositiveIntegerField(default=0)
+    xp = models.PositiveIntegerField()
     extra_hitpoints = models.PositiveIntegerField(default=0)
+    extra_mana = models.PositiveIntegerField(default=0)
     free_123_spells = models.PositiveIntegerField(default=0)
     free_456_spells = models.PositiveIntegerField(default=0)
     free_789_spells = models.PositiveIntegerField(default=0)
+    free_recipes = models.PositiveIntegerField(default=0)
 
     def __unicode__(self):
         return self.naam
