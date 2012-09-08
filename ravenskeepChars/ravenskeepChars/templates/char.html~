@@ -52,7 +52,7 @@
 				
 				<div class="clear">
 					<div class="linksstats">Godsdienst:</div>
-					<div>{{ char.god.naam }}{% if char.subgod %}( Subgod: {{ char.subgod.naam }} ){% endif %}</div>
+					<div>{{ char.god.naam }}{% if char.subgod %} ( Subgod: {{ char.subgod.naam }} ){% endif %}</div>
 				</div>
 
 			
@@ -129,7 +129,7 @@
 		</div>
 		<div class="spreuken">
 				<div>Magier spreuken:</div>
-				{% for spell in char.mage_spells.all %}
+				{% for spell in char.mage_spells.order_by('niveau').all %}
 					<div class="spreuk">{{ spell.naam }} (niveau {{ spell.niveau }}, {{ spell.mana }} mana)</div>
 				{% endfor %}
 		</div>
@@ -140,7 +140,7 @@
 		</div>
 		<div class="spreuken">
 				<div>Priester spreuken:</div>
-				{% for spell in char.priest_spells.all %}
+				{% for spell in char.priest_spells.order_by('niveau').all %}
 					<div class="spreuk">{{ spell.naam }} (niveau {{ spell.niveau }}, kost {{ spell.mana }} mana)</div>
 				{% endfor %}
 		</div>
