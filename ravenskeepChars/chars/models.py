@@ -121,6 +121,9 @@ class Player(models.Model):
     tussenvoegsels = models.CharField(max_length=50, blank=True)
     achternaam = models.CharField(max_length=50)
 
+    class Meta:
+        ordering = ['voornaam', 'achternaam']
+
     def naam(self):
         if self.tussenvoegsels is None:
             return self.voornaam + " " + self.achternaam
@@ -196,6 +199,9 @@ class MageSpell(Spell):
 class Recipe(models.Model):
     name = models.CharField(max_length=50)
     code = models.CharField(max_length=5)
+
+    class Meta:
+        ordering = ['name', 'code']
 
     def __unicode__(self):
         return self.name + " (" + self.code + ")"
