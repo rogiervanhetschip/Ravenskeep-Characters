@@ -8,7 +8,7 @@ def prepare_deployment(branch_name):
 
 def deploy():
     with lcd('/home/rogier/digi/ravenskeepChars'):
-        local('git pull /home/rogier/digi/devRavenskeepChars')
+        local('git pull /home/rogier/digi/ravenskeepChars')
         local('python manage.py migrate chars')
         local('python manage.py test chars')
         local('/my/command/to/restart/webserver')
