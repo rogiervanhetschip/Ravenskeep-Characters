@@ -38,7 +38,10 @@ class Character(models.Model):
     def xp_spent_recipes(self):
         recipe_count = self.recipes.count()
         aggregate_recipes = self.skills.aggregate(Sum('free_recipes'))
-        return max(recipe_count - aggregate_recipes['free_recipes__sum'], 0)
+        x_factor = 0
+        if(self.x_factor_skill):
+            x_factor = self.x_factor_skill.free_recipes
+        return max(recipe_count - aggregate_recipes['free_recipes__sum'] - x_factor, 0)
 
     def xp_spent_mage_spells(self):
         aggregate_mage_spells = self.mage_spells.aggregate(Sum('xp'))
@@ -222,8 +225,17 @@ class CharacterAdmin(admin.ModelAdmin):
     readonly_fields = ('id', 'xp_total', 'xp_spent', 'xp_remaining', 'hitpoints', 'mana')
 
     formfield_overrides = {
-        models.ManyToManyField: { 'widget': SelectMultiple(attrs={'style':'height: 200px'}) },
-#        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
+#        models.ManyToManyField: { 'widget': SelectMultiple(attrs={'style':'height: 200px'}) },
+#        models.ManyToManyField: {'widget': forms.CheckboxSelectMultiple},
 #ChosenSelectMultiple
     }
+
+    filter_horizontal = [
+        'skills',
+        'spreuken',
+        'priest_spells',
+        'mage_spells',
+        'recipes',
+    ]
+
 
