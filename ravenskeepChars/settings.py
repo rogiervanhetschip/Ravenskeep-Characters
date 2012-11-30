@@ -145,7 +145,7 @@ INSTALLED_APPS = (
     'chars',
 )
 
-LOGIN_URL = '/ravenskeepChars/login/'
+LOGIN_URL = '/login/'
 
 LOGIN_REDIRECT_URL = '/ravenskeepChars/'
 

@@ -9,16 +9,23 @@ def home(request):
     c = {}
     c.update(csrf(request))
     if request.method == 'POST':
+        if request.POST['oldornew'] == 'old':
+            return redirect('charold/' + request.POST['charId'], c)
         return redirect('char/' + request.POST['charId'], c)
     return render_to_response('index.html', c)
 
 @login_required
-def char(request, char_id):
+def charRead(request, char_id):
     char = get_object_or_404(Character, id=char_id)
     return render_to_response('char.html', {'char': char})
 
 @login_required
+def charPrintPreview(request, char_id):
+    char = get_object_or_404(Character, id=char_id)
+    return render_to_response('charPrintPreview.html', {'char': char})
+
+@login_required
 def logout_user(request):
     logout(request)
-    return redirect('/ravenskeepChars/login/')
+    return redirect('/login/')
 

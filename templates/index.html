@@ -5,6 +5,14 @@
 		<form action="" method="POST">
                         {% csrf_token %}
 			<input type="text" name="charId" />
+			<input type="hidden" name="oldornew" value="new">
+			<button type="submit">Openen</button>
+		</form>
+		Geef character ID getal (oude opmaak)):
+		<form action="" method="POST">
+                        {% csrf_token %}
+			<input type="text" name="charId" />
+			<input type="hidden" name="oldornew" value="old">
 			<button type="submit">Openen</button>
 		</form>
 		<a href="{% url chars.views.logout_user %}">Logout</a>
