@@ -10,7 +10,7 @@ def home(request):
     c.update(csrf(request))
     if request.method == 'POST':
         if request.POST['oldornew'] == 'old':
-            return redirect('charold/' + request.POST['charId'], c)
+            return redirect('char/' + request.POST['charId'] + '/printpreview/', c)
         return redirect('char/' + request.POST['charId'], c)
     return render_to_response('index.html', c)
 
