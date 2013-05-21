@@ -107,11 +107,17 @@ class Character(models.Model):
                     39 : 8,
         }
         aggregate_hitpoints = self.skills.aggregate(Sum('extra_hitpoints'))
-        return hp_count[self.live_nr] + aggregate_hitpoints['extra_hitpoints__sum']
+        x_factor = 0
+        if(self.x_factor_skill):
+            x_factor = self.x_factor_skill.extra_hitpoints
+        return hp_count[self.live_nr] + aggregate_hitpoints['extra_hitpoints__sum'] + x_factor
 
     def mana(self):
         aggregate_mana = self.skills.aggregate(Sum('extra_mana'))
-        return 5 + self.live_nr + aggregate_mana['extra_mana__sum']
+        x_factor = 0
+        if(self.x_factor_skill):
+            x_factor = self.x_factor_skill.extra_mana
+        return 5 + self.live_nr + aggregate_mana['extra_mana__sum'] + x_factor
 
     def __unicode__(self):
         return self.character_naam
