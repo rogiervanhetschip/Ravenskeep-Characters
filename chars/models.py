@@ -204,7 +204,7 @@ class Recipe(models.Model):
     code = models.CharField(max_length=5)
 
     class Meta:
-        ordering = ['name', 'code']
+        ordering = ['code', 'name']
 
     def __unicode__(self):
         return self.name + " (" + self.code + ")"
@@ -238,4 +238,7 @@ class CharacterAdmin(admin.ModelAdmin):
         'recipes',
     ]
 
+class RecipeAdmin(admin.ModelAdmin):
+
+    list_display = ('name', 'code')
 

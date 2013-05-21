@@ -1,4 +1,4 @@
-from chars.models import Character, Player, Skill, God, Race, Item, Spell, MageSpell, PriestSpell, Recipe, CharacterAdmin
+from chars.models import Character, Player, Skill, God, Race, Item, Spell, MageSpell, PriestSpell, Recipe, CharacterAdmin, RecipeAdmin
 from django.contrib import admin
 
 admin.site.register(Character, CharacterAdmin)
@@ -10,6 +10,6 @@ admin.site.register(Item)
 admin.site.register(Spell)
 admin.site.register(MageSpell)
 admin.site.register(PriestSpell)
-admin.site.register(Recipe)
+admin.site.register(Recipe, RecipeAdmin)
 
 
