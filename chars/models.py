@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Q
+from django.db.models import F
 from django.contrib import admin
 from django.db.models import Sum
 from django.forms.widgets import CheckboxSelectMultiple, SelectMultiple
@@ -24,6 +26,9 @@ class Character(models.Model):
     recipes = models.ManyToManyField('Recipe', null=True, blank=True)
     dood = models.BooleanField()
     leermeesterpunten = models.PositiveIntegerField(default=0)
+    
+    def all_skills(self):
+        return Skill.objects.filter(Q(id=self.x_factor_skill.id) | Q(id__in=self.skills.all()))
 
     def xp_total(self):
         return 14 + self.live_nr + self.ras.xp_extra + self.leermeesterpunten
@@ -37,11 +42,8 @@ class Character(models.Model):
 
     def xp_spent_recipes(self):
         recipe_count = self.recipes.count()
-        aggregate_recipes = self.skills.aggregate(Sum('free_recipes'))
-        x_factor = 0
-        if(self.x_factor_skill):
-            x_factor = self.x_factor_skill.free_recipes
-        return max(recipe_count - aggregate_recipes['free_recipes__sum'] - x_factor, 0)
+        aggregate_recipes = self.all_skills().aggregate(Sum('free_recipes'))
+        return max(recipe_count - aggregate_recipes['free_recipes__sum'], 0)
 
     def xp_spent_mage_spells(self):
         aggregate_mage_spells = self.mage_spells.aggregate(Sum('xp'))
@@ -54,7 +56,7 @@ class Character(models.Model):
             for level in range(spell_group[0], spell_group[1]):
                 # Find all spells of appropriate level, order by xp
                 spells = self.priest_spells.filter(niveau=level).order_by('xp').reverse()
-                number_of_free_spells = self.skills.aggregate(Sum(spell_group[2]))[spell_group[2]+'__sum']
+                number_of_free_spells = self.all_skills().aggregate(Sum(spell_group[2]))[spell_group[2]+'__sum']
                 # Remove most expensive of each level you're allowed to have
                 if(number_of_free_spells > 0):
                     spells = spells[number_of_free_spells:].annotate()
@@ -106,18 +108,12 @@ class Character(models.Model):
                     38 : 8,
                     39 : 8,
         }
-        aggregate_hitpoints = self.skills.aggregate(Sum('extra_hitpoints'))
-        x_factor = 0
-        if(self.x_factor_skill):
-            x_factor = self.x_factor_skill.extra_hitpoints
-        return hp_count[self.live_nr] + aggregate_hitpoints['extra_hitpoints__sum'] + x_factor
+        aggregate_hitpoints = self.all_skills().aggregate(Sum('extra_hitpoints'))
+        return hp_count[self.live_nr] + aggregate_hitpoints['extra_hitpoints__sum']
 
     def mana(self):
-        aggregate_mana = self.skills.aggregate(Sum('extra_mana'))
-        x_factor = 0
-        if(self.x_factor_skill):
-            x_factor = self.x_factor_skill.extra_mana
-        return 5 + self.live_nr + aggregate_mana['extra_mana__sum'] + x_factor
+        aggregate_mana = self.all_skills().aggregate(Sum('extra_mana'))
+        return 5 + self.live_nr + aggregate_mana['extra_mana__sum']
 
     def __unicode__(self):
         return self.character_naam
