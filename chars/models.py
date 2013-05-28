@@ -38,7 +38,7 @@ class Character(models.Model):
 
     def xp_spent_skills(self):
         aggregate_skills = self.skills.aggregate(Sum('xp'))
-        return aggregate_skills['xp__sum']
+        return max(aggregate_skills['xp__sum'], 0)
 
     def xp_spent_recipes(self):
         recipe_count = self.recipes.count()
