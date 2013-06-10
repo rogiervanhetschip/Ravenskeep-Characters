@@ -14,6 +14,8 @@ class Character(models.Model):
     live_nr = models.PositiveIntegerField(default=1)
     hitpoints = models.PositiveIntegerField(default=1)
     mana = models.PositiveIntegerField(default=0)
+    first_live_nr_mana = models.PositiveIntegerField(default=0)
+    has_mana = models.BooleanField() # Character has mana of his own, even without receiving mana from Skills
     god = models.ForeignKey('God', null=True, blank=True)
     subgod = models.ForeignKey('God', null=True, blank=True, related_name='subgod_character')
     skills = models.ManyToManyField('Skill', null=True, blank=True, related_name='skills')
@@ -28,7 +30,10 @@ class Character(models.Model):
     leermeesterpunten = models.PositiveIntegerField(default=0)
     
     def all_skills(self):
-        return Skill.objects.filter(Q(id=self.x_factor_skill.id) | Q(id__in=self.skills.all()))
+        if self.x_factor_skill == None:
+            return Skill.objects.filter(Q(id__in=self.skills.all()))
+        else:
+            return Skill.objects.filter(Q(id=self.x_factor_skill.id) | Q(id__in=self.skills.all()))
 
     def xp_total(self):
         return 14 + self.live_nr + self.ras.xp_extra + self.leermeesterpunten
@@ -43,7 +48,7 @@ class Character(models.Model):
     def xp_spent_recipes(self):
         recipe_count = self.recipes.count()
         aggregate_recipes = self.all_skills().aggregate(Sum('free_recipes'))
-        return max(recipe_count - aggregate_recipes['free_recipes__sum'], 0)
+        return max(recipe_count - max(aggregate_recipes['free_recipes__sum'], 0), 0)
 
     def xp_spent_mage_spells(self):
         aggregate_mage_spells = self.mage_spells.aggregate(Sum('xp'))
@@ -58,7 +63,7 @@ class Character(models.Model):
                 spells = self.priest_spells.filter(niveau=level).order_by('xp').reverse()
                 number_of_free_spells = self.all_skills().aggregate(Sum(spell_group[2]))[spell_group[2]+'__sum']
                 # Remove most expensive of each level you're allowed to have
-                if(number_of_free_spells > 0):
+                if number_of_free_spells > 0:
                     spells = spells[number_of_free_spells:].annotate()
                 # Sum the rest
                 xp += max(spells.aggregate(Sum('xp'))['xp__sum'], 0)
@@ -109,11 +114,35 @@ class Character(models.Model):
                     39 : 8,
         }
         aggregate_hitpoints = self.all_skills().aggregate(Sum('extra_hitpoints'))
-        return hp_count[self.live_nr] + aggregate_hitpoints['extra_hitpoints__sum']
+        return hp_count[self.live_nr] + max(aggregate_hitpoints['extra_hitpoints__sum'], 0)
 
     def mana(self):
+        if self.first_live_nr_mana == 0:
+            return 0
+        if self.has_mana:
+            return calc_mana(self)
+        gives_mana_count = self.all_skills().filter(gives_mana=True).count()
+        if gives_mana_count > 0:
+            return self.calc_mana()
+        return 0
+
+    def calc_mana(self):
         aggregate_mana = self.all_skills().aggregate(Sum('extra_mana'))
-        return 5 + self.live_nr + aggregate_mana['extra_mana__sum']
+        return 5 + (self.live_nr - self.first_live_nr_mana) + aggregate_mana['extra_mana__sum']
+
+    def save(self):
+        # If a character does not have a starting live for his mana count,
+        # and either has mana of his own, or one of his skills gives mana...
+        if self.first_live_nr_mana == 0:
+            if self.has_mana:
+                # ... set the starting live for his mana count to the current live
+                self.first_live_nr_mana = self.live_nr
+            else:
+                self.all_skills().filter(gives_mana=True).annotate(num_mana_from_skills=Count('gives_mana'))
+                if num_mana_from_skills > 0:
+                    # ... set the starting live for his mana count to the current live
+                    self.first_live_nr_mana = self.live_nr
+        super(Character, self)
 
     def __unicode__(self):
         return self.character_naam
@@ -140,6 +169,7 @@ class Player(models.Model):
 class Skill(models.Model):
     naam = models.CharField(max_length=50)
     xp = models.PositiveIntegerField()
+    gives_mana = models.BooleanField()
     extra_hitpoints = models.PositiveIntegerField(default=0)
     extra_mana = models.PositiveIntegerField(default=0)
     free_123_spells = models.PositiveIntegerField(default=0)
