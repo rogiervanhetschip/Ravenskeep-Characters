@@ -4,6 +4,8 @@ from django.db.models import F
 from django.contrib import admin
 from django.db.models import Sum
 from django.forms.widgets import CheckboxSelectMultiple, SelectMultiple
+from django.shortcuts import redirect
+from django.shortcuts import render_to_response
 import pdb
 
 class Character(models.Model):
@@ -247,6 +249,7 @@ class ItemInline(admin.TabularInline):
 class SkillInline(admin.TabularInline):
     model = Race
 
+
 class CharacterAdmin(admin.ModelAdmin):
     inlines = [
         ItemInline,
@@ -269,6 +272,15 @@ class CharacterAdmin(admin.ModelAdmin):
         'mage_spells',
         'recipes',
     ]
+
+    actions = ['print_chars']
+
+    def print_chars(self, request, queryset):
+        #return redirect('charsPrintPreview', args=(queryset,))
+        # TODO: View logic in your models? Separate your concerns much? Move this through a view!
+        return render_to_response('charPrintPreview.html', {'chars': queryset})
+    
+    print_chars.short_description = "Print geselecteerde characters"
 
 class RecipeAdmin(admin.ModelAdmin):
 
