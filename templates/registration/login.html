@@ -1,8 +1,11 @@
-<html>
-<head>
-<title>Inloggen</title>
-<body>
+{% extends "menupage.html" %}
 
+{% block title %}Inloggen{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
 {% if form.errors %}
 <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
@@ -23,4 +26,5 @@
 <input type="submit" value="login" />
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
-</body>
+{% endblock %}
+

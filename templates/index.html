@@ -1,21 +1,40 @@
-<html>
+{% extends "menupage.html" %}
 
-	<body>
-		Geef character ID getal:
-		<form action="" method="POST">
-                        {% csrf_token %}
-			<input type="text" name="charId" />
-			<input type="hidden" name="oldornew" value="new">
-			<button type="submit">Openen</button>
+{% block title %}Ravenskeep Characters{% endblock %}
+
+{% block sidebar %}
+<li><a href="">Delete selected</a></li>
+<li><a href="">Print selected</a></li>
+{% endblock %}
+
+{% block content %}
+		<form action="" method="POST" class="form-horizontal">
+			<div class="control-group">
+				<label class="control-label" for="charId">Character id</label>
+				<div class="controls">
+					<input type="text" name="charId" placeholder="Character id">
+					{% csrf_token %}
+					<input type="hidden" name="oldornew" value="new">
+					<button type="submit">Openen</button>
+				</div>
+			</div>
 		</form>
-		Geef character ID getal (oude opmaak)):
-		<form action="" method="POST">
-                        {% csrf_token %}
-			<input type="text" name="charId" />
-			<input type="hidden" name="oldornew" value="old">
-			<button type="submit">Openen</button>
+		</div>
+		<form action="" method="POST" class="form-horizontal">
+			Oude opmaak:
+			<div class="control-group">
+				<label class="control-label" for="charId">Character id</label>
+				<div class="controls">
+					<input type="text" name="charId" placeholder="Character id">
+					{% csrf_token %}
+					<input type="hidden" name="oldornew" value="old">
+					<button type="submit">Openen</button>
+				</div>
+			</div>
 		</form>
+		</div>
+		
 		<a href="{% url chars.views.logout_user %}">Logout</a>
-	</body>
-</html>
+		</div>
+{% endblock %}
 
