@@ -9,32 +9,42 @@
 
 {% block content %}
 		<form action="" method="POST" class="form-horizontal">
+			<fieldset>			
 			<div class="control-group">
 				<label class="control-label" for="charId">Character id</label>
 				<div class="controls">
 					<input type="text" name="charId" placeholder="Character id">
 					{% csrf_token %}
 					<input type="hidden" name="oldornew" value="new">
-					<button type="submit">Openen</button>
 				</div>
 			</div>
+			<div class="control-group">
+				<div class="controls">
+					<button type="submit" class="btn btn-primary">Openen</button>
+				</div>
+			</div>
+			</fieldset>
 		</form>
-		</div>
+
 		<form action="" method="POST" class="form-horizontal">
-			Oude opmaak:
+			<fieldset>
+			<div class="control-group">
+				<span class="control-label">Oude opmaak:</label>
+			</div>
 			<div class="control-group">
 				<label class="control-label" for="charId">Character id</label>
 				<div class="controls">
 					<input type="text" name="charId" placeholder="Character id">
 					{% csrf_token %}
 					<input type="hidden" name="oldornew" value="old">
-					<button type="submit">Openen</button>
 				</div>
 			</div>
+			<div class="control-group">
+				<div class="controls">
+					<button type="submit" class="btn">Openen</button>
+				</div>
+			</div>
+			</fieldset>
 		</form>
-		</div>
-		
-		<a href="{% url chars.views.logout_user %}">Logout</a>
-		</div>
 {% endblock %}
 
