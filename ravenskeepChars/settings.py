@@ -145,6 +145,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'south',
     'chars',
+    'widget_tweaks',
 )
 
 LOGIN_URL = '/login/'
