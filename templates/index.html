@@ -8,43 +8,32 @@
 {% endblock %}
 
 {% block content %}
-		<form action="" method="POST" class="form-horizontal">
-			<fieldset>			
-			<div class="control-group">
-				<label class="control-label" for="charId">Character id</label>
-				<div class="controls">
-					<input type="text" name="charId" placeholder="Character id">
-					{% csrf_token %}
-					<input type="hidden" name="oldornew" value="new">
-				</div>
-			</div>
-			<div class="control-group">
-				<div class="controls">
-					<button type="submit" class="btn btn-primary">Openen</button>
-				</div>
-			</div>
-			</fieldset>
-		</form>
-
-		<form action="" method="POST" class="form-horizontal">
-			<fieldset>
-			<div class="control-group">
-				<span class="control-label">Oude opmaak:</label>
-			</div>
-			<div class="control-group">
-				<label class="control-label" for="charId">Character id</label>
-				<div class="controls">
-					<input type="text" name="charId" placeholder="Character id">
-					{% csrf_token %}
-					<input type="hidden" name="oldornew" value="old">
-				</div>
-			</div>
-			<div class="control-group">
-				<div class="controls">
-					<button type="submit" class="btn">Openen</button>
-				</div>
-			</div>
-			</fieldset>
-		</form>
+<div class="pagination">
+  <ul>
+    <li><a href="#">Prev</a></li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#">Next</a></li>
+  </ul>
+</div>
+TODO: Dode chars opvragen
+<table class="table table-striped table-hover">
+<thead><th></th>
+  <th>Naam character</th>
+  <th>Naam speler</th>
+</thead>
+{% for char in chars %}
+<tbody>
+<tr>
+<td><input type=checkbox /></td>
+<td><a href="{% url charPrintPreview char.id %}">{{ char.character_naam }}</a></td>
+<td>{{ char.speler.naam }}</td>
+</tr>
+</tbody>
+{% endfor %}
+</table>
 {% endblock %}
 
