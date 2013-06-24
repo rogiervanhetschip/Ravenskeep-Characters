@@ -9,7 +9,7 @@ import pdb
 def home(request):
   c = {}
   c.update(csrf(request))
-  chars = Character.objects.filter(dood=False) # Evt. later values() gebruiken, maar dan moet method 
+  chars = Character.objects.filter(dood=False)
   return render(request, 'index.html', { 'chars': chars, 'c': c })
 
 @login_required
