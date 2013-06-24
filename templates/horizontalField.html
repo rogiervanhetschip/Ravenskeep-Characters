@@ -1,0 +1,16 @@
+{% for field in form %}
+<div class="control-group">
+  <label class="control-label" for="{{ field.html_name }}">{{ field.label }}</label>
+  <div class="controls">
+    <input type="text" name="{{ field.html_name }}" placeholder="{{ field.label }}" />
+    {{ field.label_tag }}: {{ field }}
+    <div class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {{ field.errors }}
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+<!-- TODO: Hidden fields, checkboxes, ForeignKeyField, ManyToManyFields -->
+
