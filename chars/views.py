@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response, get_object_or_404, redirect, re
 from django.core.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from chars.models import Character
 import pdb
 
@@ -9,7 +10,16 @@ import pdb
 def home(request):
   c = {}
   c.update(csrf(request))
-  chars = Character.objects.filter(dood=False)
+  chars_complete = Character.objects.filter(dood=False)
+  p = Paginator(chars_complete, 1)
+  page_nr = request.GET.get('page_nr')
+  try:
+    chars = p.page(page_nr)
+  except PageNotAnInteger:
+    chars = p.page(1)
+  except EmptyPage:
+    chars = p.page(p.num_pages)
+
   return render(request, 'index.html', { 'chars': chars, 'c': c })
 
 @login_required

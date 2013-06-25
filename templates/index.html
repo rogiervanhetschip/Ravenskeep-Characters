@@ -8,32 +8,58 @@
 {% endblock %}
 
 {% block content %}
+{% if chars.has_other_pages %}
 <div class="pagination">
   <ul>
-    <li><a href="#">Prev</a></li>
-    <li><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-    <li><a href="#">Next</a></li>
+    {% if chars.has_previous %}
+    <li><a href="{% url home %}?page_nr={{ chars.previous_page_number }}">Prev</a></li>
+    {% endif %}
+    {% if chars.number > 3 %}
+    <li><a href="{% url home %}?page_nr=1">1</a></li>
+    {% endif %}
+    {% if chars.number > 4 %}
+    <li><a>...</a></li>
+    {% endif %}
+    {% if chars.previous_page_number|add:"-1" > 0 %}
+    <li><a href="{% url home %}?page_nr={{ chars.previous_page_number|add:"-1" }}">{{ chars.previous_page_number|add:"-1" }}</a></li>
+    {% endif %}
+    {% if chars.has_previous %}
+    <li><a href="{% url home %}?page_nr={{ chars.previous_page_number }}">{{ chars.previous_page_number }}</a></li>
+    {% endif %}
+    <li><a href="{% url home %}?page_nr={{ chars.number }}">{{ chars.number }}</a></li>
+    {% if chars.has_next %}
+    <li><a href="{% url home %}?page_nr={{ chars.next_page_number }}">{{ chars.next_page_number }}</a></li>
+    {% endif %}
+    {% if chars.next_page_number|add:"1" < chars.paginator.num_pages %}
+    <li><a href="{% url home %}?page_nr={{ chars.next_page_number|add:"1" }}">{{ chars.next_page_number|add:"1" }}</a></li>
+    {% endif %}
+    {% if chars.next_page_number < chars.paginator.num_pages|add:"-4" %}
+    <li><a>...</a></li>
+    {% endif %}
+    {% if chars.next_page_number < chars.paginator.num_pages|add:"-3" %}
+    <li><a href="{% url home %}?page_nr={{ chars.paginator.num_pages }}">{{ chars.paginator.num_page }}</a></li>
+    {% endif %}
+    {% if chars.has_next %}
+    <li><a href="{% url home %}?page_nr={{ chars.next_page_number }}">Next</a></li>
+    {% endif %}
   </ul>
 </div>
+{% endif %}
 TODO: Dode chars opvragen. Tabs?
 <table class="table table-striped table-hover" data-provides="rowlink">
-<thead><th></th>
-  <th>Naam character</th>
-  <th>Naam speler</th>
-</thead>
-{% for char in chars %}
-<tbody>
-<tr>
-<td><input type=checkbox /></td>
-<td><a href="{% url charPrintPreview char.id %}">{{ char.character_naam }}</a></td>
-<td>{{ char.speler.naam }}</td>
-</tr>
-</tbody>
-{% endfor %}
+  <thead><th></th>
+    <th>Naam character</th>
+    <th>Naam speler</th>
+  </thead>
+  {% for char in chars %}
+  <tbody>
+    <tr>
+      <td><input type=checkbox /></td>
+      <td><a href="{% url charPrintPreview char.id %}">{{ char.character_naam }}</a></td>
+      <td>{{ char.speler.naam }}</td>
+    </tr>
+  </tbody>
+  {% endfor %}
 </table>
 {% endblock %}
 
