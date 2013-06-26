@@ -1,0 +1,13 @@
+{% extends "base/menupage.html" %}
+
+{% block title %}Create new character{% endblock %}
+
+{% block content %}
+{% csrf_token %}
+<form>
+  <fieldset>
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Opslaan</button>
+  </fieldset>
+</form>
+{% endblock %}

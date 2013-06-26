@@ -2,7 +2,9 @@
 
 {% block sidebar %}
 <li class="nav-header">Characters</li>
-<li><a href="">Create new</a></li>
+<li><a href="{% url charNew %}">Create new</a></li>
 {% block sidebarextend %}
 {% endblock %}
+<li class="nav-header">Admin</li>
+<li><a href="{% url logout %}">Logout</a></li>
 {% endblock %}
