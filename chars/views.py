@@ -7,12 +7,17 @@ from chars.models import Character
 from chars.forms import CharacterForm
 import pdb
 
+def admin_rights(request):
+  if request.user.is_staff:
+    return True
+  return False
+
 @login_required
 def home(request):
   c = {}
   c.update(csrf(request))
   chars_complete = Character.objects.filter(dood=False)
-  p = Paginator(chars_complete, 20)
+  p = Paginator(chars_complete, 50)
   page_nr = request.GET.get('page_nr')
   try:
     chars = p.page(page_nr)
@@ -20,7 +25,7 @@ def home(request):
     chars = p.page(1)
   except EmptyPage:
     chars = p.page(p.num_pages)
-  return render(request, 'index.html', { 'chars': chars, 'c': c })
+  return render(request, 'index.html', { 'chars': chars, 'c': c, 'admin': admin_rights(request) })
 
 @login_required
 def charRead(request, char_id):
@@ -42,16 +47,16 @@ def charNew(request):
   c = {}
   c.update(csrf(request))
   if request.method == 'POST':
+    pdb.set_trace()
     form = CharacterForm(request.POST)
-    if form.is_valid:
+    if form.is_valid():
       # Character opslaan
-      
+      form.save()
       return redirect('home') # TODO: "Opgeslagen!" melding sturen
   else:
     form = CharacterForm()
-  return render(request, 'charNew.html', { 'form': form, 'c': c })
+  return render(request, 'charNew.html', { 'form': form, 'c': c, 'admin': admin_rights(request) })
 # TODO: Foutmeldingen op het scherm tonen
-# TODO: In hoofdmenu admin toegang tonen, als gebruiker dat mag
 
 @login_required
 def logout_user(request):

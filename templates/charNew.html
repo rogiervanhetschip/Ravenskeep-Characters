@@ -3,11 +3,11 @@
 {% block title %}Create new character{% endblock %}
 
 {% block content %}
-{% csrf_token %}
-<form>
+<form method="post">
+  {% csrf_token %}
   <fieldset>
     {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Opslaan</button>
   </fieldset>
+  <button type="submit" class="btn btn-primary">Opslaan</button>
 </form>
 {% endblock %}
