@@ -2,5 +2,6 @@ env/
 
 *.py[~cod]
 *~
-.*.swp # VIM swap files
+*.swp
+*.swo
 
