@@ -20,8 +20,8 @@
     {% if chars.number > 4 %}
     <li><a>...</a></li>
     {% endif %}
-    {% if chars.previous_page_number|add:"-1" > 0 %}
-    <li><a href="{% url home %}?page_nr={{ chars.previous_page_number|add:"-1" }}">{{ chars.previous_page_number|add:"-1" }}</a></li>
+    {% if chars.number|add:"-2" > 0 %}
+    <li><a href="{% url home %}?page_nr={{ chars.number|add:"-2" }}">{{ chars.number|add:"-2" }}</a></li>
     {% endif %}
     {% if chars.has_previous %}
     <li><a href="{% url home %}?page_nr={{ chars.previous_page_number }}">{{ chars.previous_page_number }}</a></li>
@@ -30,14 +30,14 @@
     {% if chars.has_next %}
     <li><a href="{% url home %}?page_nr={{ chars.next_page_number }}">{{ chars.next_page_number }}</a></li>
     {% endif %}
-    {% if chars.next_page_number|add:"1" < chars.paginator.num_pages %}
-    <li><a href="{% url home %}?page_nr={{ chars.next_page_number|add:"1" }}">{{ chars.next_page_number|add:"1" }}</a></li>
+    {% if chars.number|add:"2" <= chars.paginator.num_pages %}
+    <li><a href="{% url home %}?page_nr={{ chars.number|add:"2" }}">{{ chars.number|add:"2" }}</a></li>
     {% endif %}
-    {% if chars.next_page_number < chars.paginator.num_pages|add:"-4" %}
+    {% if chars.number < chars.paginator.num_pages|add:"-3" %}
     <li><a>...</a></li>
     {% endif %}
-    {% if chars.next_page_number < chars.paginator.num_pages|add:"-3" %}
-    <li><a href="{% url home %}?page_nr={{ chars.paginator.num_pages }}">{{ chars.paginator.num_page }}</a></li>
+    {% if chars.number < chars.paginator.num_pages|add:"-2" %}
+    <li><a href="{% url home %}?page_nr={{ chars.paginator.num_pages }}">{{ chars.paginator.num_pages }}</a></li>
     {% endif %}
     {% if chars.has_next %}
     <li><a href="{% url home %}?page_nr={{ chars.next_page_number }}">Next &raquo;</a></li>

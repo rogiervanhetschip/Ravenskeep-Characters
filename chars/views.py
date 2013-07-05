@@ -3,7 +3,8 @@ from django.core.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from chars.models import Character
+from django.forms.models import inlineformset_factory
+from chars.models import Character, Item
 from chars.forms import CharacterForm
 import pdb
 
@@ -17,7 +18,7 @@ def home(request):
   c = {}
   c.update(csrf(request))
   chars_complete = Character.objects.filter(dood=False)
-  p = Paginator(chars_complete, 50)
+  p = Paginator(chars_complete, 20)
   page_nr = request.GET.get('page_nr')
   try:
     chars = p.page(page_nr)
@@ -46,16 +47,21 @@ def charsPrintPreview(request, chars):
 def charNew(request):
   c = {}
   c.update(csrf(request))
+  ItemInlineFormSet = inlineformset_factory(Character, Item)
   if request.method == 'POST':
-    pdb.set_trace()
     form = CharacterForm(request.POST)
+    items_form = ItemInlineFormSet() #???
     if form.is_valid():
-      # Character opslaan
+      # Character save
       form.save()
-      return redirect('home') # TODO: "Opgeslagen!" melding sturen
+      if items_form.is_valid():
+        # Items save
+	items_form.save()
+        return redirect('home') # TODO: "Opgeslagen!" melding sturen
   else:
     form = CharacterForm()
-  return render(request, 'charNew.html', { 'form': form, 'c': c, 'admin': admin_rights(request) })
+    items_form = ItemInlineFormSet() #???
+  return render(request, 'charNew.html', { 'form': form, 'c': c, 'items': items_form, 'admin': admin_rights(request) })
 # TODO: Foutmeldingen op het scherm tonen
 
 @login_required
