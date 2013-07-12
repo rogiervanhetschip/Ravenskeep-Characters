@@ -6,7 +6,7 @@ from django.db.models import Sum, Count
 from django.forms.widgets import CheckboxSelectMultiple, SelectMultiple
 from django.shortcuts import redirect
 from django.shortcuts import render_to_response
-from django.db.models.signals import post_save
+from django.db.models.signals import m2m_changed
 from django.dispatch import receiver
 import pdb
 
@@ -134,30 +134,31 @@ class Character(models.Model):
     aggregate_mana = self.all_skills().aggregate(Sum('extra_mana'))
     return 5 + (self.live_nr - self.first_live_nr_mana) + aggregate_mana['extra_mana__sum']
 
-#  @receiver(post_save)
-#  def recalc_first_live_nr_mana(**kwargs):
-  def save(self, force_insert=False, force_update=False):
-#   char = kwargs['instance']
+  def save(self, *args, **kwargs):
     # If a character does not have a starting live for his mana count,
-    # and either has mana of his own, or one of his skills gives mana...
+    # and has mana of its own, or its x-factor skill gives mana...
     if self.first_live_nr_mana == 0:
-      if self.has_mana:
-	# ... set the starting live for his mana count to the current live
-	self.first_live_nr_mana = self.live_nr
-	super(Character, self).save(force_insert, force_update)
-      else:
-	pdb.set_trace()
-	s = char.all_skills().filter(gives_mana=True)
-	if s.count() > 0:
-	  # ... set the starting live for his mana count to the current live
-	  self.first_live_nr_mana = self.live_nr
-	  super(Character, self).save(force_insert, force_update)
+      if self.has_mana or (self.x_factor_skill and self.x_factor_skill.gives_mana):
+        # ... set the starting live for his mana count to the current live
+        self.first_live_nr_mana = self.live_nr
+    return super(Character, self).save(*args, **kwargs)
 
   def __unicode__(self):
     return self.character_naam
 
   class Meta:
     ordering = ['speler', 'character_naam']
+
+@receiver(m2m_changed, sender=Character.skills.through)
+def recalc_first_live_nr_mana(sender, instance, action, **kwargs):
+  # If a character does not have a starting live for his mana count,
+  # and one of his skills gives mana...
+  if instance.first_live_nr_mana == 0:
+    s = instance.all_skills().filter(gives_mana=True)
+    if s.count() > 0:
+      # ... set the starting live for his mana count to the current live
+      instance.first_live_nr_mana = instance.live_nr
+      instance.save()
 
 class Player(models.Model):
   voornaam = models.CharField(max_length=50)
