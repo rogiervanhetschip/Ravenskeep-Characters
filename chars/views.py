@@ -51,13 +51,12 @@ def charNew(request):
   if request.method == 'POST':
     form = CharacterForm(request.POST)
     items_form = ItemInlineFormSet() #???
-    if form.is_valid():
+    if form.is_valid() and items_form.is_valid():
       # Character save
       form.save()
-      if items_form.is_valid():
-        # Items save
-	items_form.save()
-        return redirect('home') # TODO: "Opgeslagen!" melding sturen
+      # Items save
+      items_form.save()
+      return redirect('home') # TODO: "Opgeslagen!" melding sturen
   else:
     form = CharacterForm()
     items_form = ItemInlineFormSet() #???
