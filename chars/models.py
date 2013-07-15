@@ -19,7 +19,7 @@ class Character(models.Model):
   hitpoints = models.PositiveIntegerField(default=1)
   mana = models.PositiveIntegerField(default=0)
   first_live_nr_mana = models.PositiveIntegerField(default=0)
-  has_mana = models.BooleanField() # Character has mana of his own, even without receiving mana from Skills
+  has_mana = models.BooleanField(help_text='Character has mana of its own, even without receiving mana from Skills')
   god = models.ForeignKey('God', null=True, blank=True)
   subgod = models.ForeignKey('God', null=True, blank=True, related_name='subgod_character')
   skills = models.ManyToManyField('Skill', null=True, blank=True, related_name='skills')
