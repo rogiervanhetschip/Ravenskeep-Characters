@@ -1,7 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.views.static import *
 from django.conf import settings
-import pdb
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -22,6 +21,6 @@ urlpatterns = patterns('',
     # Required to make static serving work
     # http://twigstechtips.blogspot.nl/2009/08/django-how-to-serve-media-files-css.html
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
-
+    
 )
 
