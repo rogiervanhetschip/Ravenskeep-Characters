@@ -18,7 +18,7 @@ def home(request):
   c = {}
   c.update(csrf(request))
   chars_complete = Character.objects.filter(dood=False)
-  p = Paginator(chars_complete, 20)
+  p = Paginator(chars_complete, 10)
   page_nr = request.GET.get('page_nr')
   try:
     chars = p.page(page_nr)
