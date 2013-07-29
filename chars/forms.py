@@ -13,7 +13,8 @@ class CharacterForm(ModelForm):
         if type(field.widget) in (TextInput, DateInput): # TODO: DateInput verwisselen met een TextInput?!
           field.widget = TextInput(attrs={'placeholder': field.label})
         elif type(field.widget) is SelectMultiple:
-          field.widget = ChosenSelectMultiple(overlay=field.help_text, choices=field.choices)
+          field.help_text = '' # Bug: https://code.djangoproject.com/ticket/9321
+          field.widget = ChosenSelectMultiple(overlay='Type away...', choices=field.choices)
 
   class Meta:
     model = Character
