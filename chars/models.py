@@ -26,7 +26,6 @@ class Character(models.Model):
   opmerkingen = models.TextField(blank=True)
   x_factor = models.CharField(max_length=250, blank=True)
   x_factor_skill = models.ForeignKey('Skill', null=True, blank=True, related_name='x_factor_skill')
-  spreuken = models.ManyToManyField('Spell', null=True, blank=True)
   mage_spells = models.ManyToManyField('MageSpell', null=True, blank=True, related_name='MageSpells')
   priest_spells = models.ManyToManyField('PriestSpell', null=True, blank=True, related_name='Priest_Spells')
   recipes = models.ManyToManyField('Recipe', null=True, blank=True)
@@ -274,7 +273,6 @@ class CharacterAdmin(admin.ModelAdmin):
 
   filter_horizontal = [
       'skills',
-      'spreuken',
       'priest_spells',
       'mage_spells',
       'recipes',
