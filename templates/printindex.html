@@ -18,26 +18,26 @@
 		<input class="absolute" id="xp_total" name="xp_total" value={{ char.xp_total }}>
 		<input class="absolute" id="xp_spent" name="xp_spent" value={{ char.xp_spent }}>
 		<input class="absolute" id="xp_remaining" name="xp_remaining" value={{ char.xp_remaining }}>
-		<input class="absolute" id="leermeesterpunten" name="leermeesterpunten" placeholder="#">
+		<input class="absolute" id="leermeesterpunten" name="leermeesterpunten">
 		<input class="absolute" id="zeer-klein" type="radio" name="grootte" value="zeer-klein">
 		<input class="absolute" id="klein" type="radio" name="grootte" value="klein">
 		<input class="absolute" id="middel" type="radio" name="grootte" value="middel">
 		<input class="absolute" id="groot" type="radio" name="grootte" value="groot">
 		<input class="absolute" id="zeer-groot" type="radio" name="grootte" value="zeer-groot">
-		<input class="absolute" id="hp_helm" name="hp_helm" value={{ char.hitpoints + char.hp_helm >
-		<input class="absolute" id="hp_linkerarm" name="hp_linkerarm" value={{ char.hitpoints + char.hp_linkerarm >
-		<input class="absolute" id="hp_rechterarm" name="hp_rechterarm" value={{ char.hitpoints + char.hp_rechterarm >
-		<input class="absolute" id="hp_torso" name="hp_torso" value={{ char.hitpoints + char.hp_torso >
-		<input class="absolute" id="hp_linkerbeen" name="hp_linkerbeen" value={{ char.hitpoints + char.hp_linkerbeen >
-		<input class="absolute" id="hp_rechterbeen" name="hp_rechterbeen" value={{ char.hitpoints + char.hp_rechterbeen >
-		<input class="absolute" id="mana" name="mana" value={{ char.mana >
-		<input class="absolute" id="eerste_mana_live" name="eerste_mana_live" value={{ char.eerste_mana_life >
-		<input class="absolute" id="leermeester" name="leermeester" placeholder="e.g. Magier">
-		<input class="absolute" id="lvlmagie" name="lvlmagie" placeholder="#">
-		<input class="absolute" id="lvlreligie" name="lvlreligie" placeholder="#">
-		<input class="absolute" id="lvlambacht" name="lvlambacht" placeholder="#">
+		<input class="absolute" id="hp_helm" name="hp_helm" value={{ char.hitpoints + char.hp_helm }}>
+		<input class="absolute" id="hp_linkerarm" name="hp_linkerarm" value={{ char.hitpoints + char.hp_linkerarm }}>
+		<input class="absolute" id="hp_rechterarm" name="hp_rechterarm" value={{ char.hitpoints + char.hp_rechterarm }}>
+		<input class="absolute" id="hp_torso" name="hp_torso" value={{ char.hitpoints + char.hp_torso }}>
+		<input class="absolute" id="hp_linkerbeen" name="hp_linkerbeen" value={{ char.hitpoints + char.hp_linkerbeen }}>
+		<input class="absolute" id="hp_rechterbeen" name="hp_rechterbeen" value={{ char.hitpoints + char.hp_rechterbeen }}>
+		<input class="absolute" id="mana" name="mana" value={{ char.mana }}>
+		<input class="absolute" id="eerste_mana_live" name="eerste_mana_live" value={{ char.eerste_mana_life }}>
+		<input class="absolute" id="leermeester" name="leermeester">
+		<input class="absolute" id="lvlmagie" name="lvlmagie">
+		<input class="absolute" id="lvlreligie" name="lvlreligie">
+		<input class="absolute" id="lvlambacht" name="lvlambacht">
 		<textarea class="absolute" id="xfactor" name="xfactor">{{ char.x_factor_skill }} {% endif %} {% if char.ras.skill %}</textarea>
-		<textarea class="absolute" id="opmerkingen" name="opmerkingen">{{ char.opmerkingen|linebreaks }}</textarea>
+		<textarea class="absolute" id="opmerkingen" name="opmerkingen" value={{ char.opmerkingen|linebreaks }}></textarea>
 	</form>
 
 <div id="tabelrechts">
