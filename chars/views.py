@@ -61,7 +61,6 @@ def charNew(request):
     form = CharacterForm()
     items_form = ItemInlineFormSet() #???
   return render(request, 'charNew.html', { 'form': form, 'c': c, 'items': items_form, 'admin': admin_rights(request) })
-# TODO: Foutmeldingen op het scherm tonen
 
 @login_required
 def logout_user(request):
