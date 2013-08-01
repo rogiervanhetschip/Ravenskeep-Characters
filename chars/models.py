@@ -282,8 +282,8 @@ class CharacterAdmin(admin.ModelAdmin):
 
   def print_chars(self, request, queryset):
     #return redirect('charsPrintPreview', args=(queryset,))
-    # TODO: View logic in your models? Separate your concerns much? Move this through a view!
-    return render_to_response('charPrintPreview.html', {'chars': queryset})
+    # TODO: View logic in your models!? Separate your concerns much? Move this through a view!
+    return render_to_response('printindex.html', {'chars': queryset})
 
   print_chars.short_description = "Print geselecteerde characters"
 

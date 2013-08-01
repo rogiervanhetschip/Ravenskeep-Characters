@@ -37,11 +37,11 @@ def charRead(request, char_id):
 @login_required
 def charPrintPreview(request, char_id):
   char = get_object_or_404(Character, id=char_id)
-  return render_to_response('printindex.html', { 'char': { char } })
+  return render_to_response('printindex.html', { 'chars': { char } })
 
 @login_required
 def charsPrintPreview(request, chars):
-  return render_to_response('charPrintPreview.html', { 'chars': chars })
+  return render_to_response('printindex.html', { 'chars': chars })
 
 @login_required
 def charNew(request):

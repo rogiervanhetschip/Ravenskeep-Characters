@@ -314,3 +314,9 @@ input[type="radio"]{
 #tabel_naam{
 	width: 70%
 }
+
+.pagebreak
+{
+  page-break-after: always;
+}
+

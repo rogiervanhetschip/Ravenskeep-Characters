@@ -6,6 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 </head>
 <body>
+  {% for char in chars %}
 	<form method="get">
 		<input class="absolute" id="speler" name="speler" value={{ char.speler.naam }}>
 		<input class="absolute" id="character_naam" name="character_naam" value={{ char.character_naam }}>
@@ -38,7 +39,7 @@
 		<input class="absolute" id="lvlambacht" name="lvlambacht" placeholder="#">
     <textarea class="absolute" id="xfactor" name="xfactor">{% if char.x_factor_skill %}{{ char.x_factor_skill }} {% endif %} {% if char.ras.skill %}{% endif %}</textarea>
 		<textarea class="absolute" id="opmerkingen" name="opmerkingen">{{ char.opmerkingen|linebreaks }}</textarea>
-	</form>
+  </form>
 
 <div id="tabelrechts">
 	<table id="vsr_lijst">
@@ -108,5 +109,7 @@
 				{% endfor %}
 			{% endif %}
 		</table>
-	</div>
+  </div>
+  <span class="pagebreak"></span>
+  {% endfor %}
 </body>
