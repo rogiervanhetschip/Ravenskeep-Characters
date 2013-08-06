@@ -19,7 +19,7 @@ env[p]=ravenskeepchars
 
 typeset -A db
 db[d]=dev
-db[t]=HEROKU_POSTGRESQL_DEV
+db[t]=HEROKU_POSTGRESQL_IVORY
 db[p]=HEROKU_POSTGRESQL_GRAY
 
 # 1. Source system (d, t, a, p)

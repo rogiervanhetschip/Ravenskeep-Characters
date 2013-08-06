@@ -1,0 +1,262 @@
+body{
+	width:297mm;
+	height:210mm;
+	padding:0mm;
+	margin:0px;
+	/*box-shadow:inset 0px 0px 0px 1px #000;*/
+	background:url('charactersheetbg.png') no-repeat left top;
+	background-size:297mm 210mm;
+}
+
+textarea{
+	border: none !IMPORTANT;
+}
+
+.absolute{
+	position:absolute;
+	/*background-color: transparent;*/
+	border: solid black 1px;
+	resize: none;
+}
+
+#logo{
+	top: 103.2mm;
+	left: 123mm;
+	width: 51.2mm;
+	height: 51.2mm;
+}
+
+#speler{
+	top:15.75mm;
+	left:31mm;
+	width:111.2mm;
+	height:6mm;
+}
+
+#character_naam{
+	top:36.6mm;
+	left:29mm;
+	width:113.3mm;
+	height:6mm;
+}
+
+#ras{
+	top:48.7mm;
+	left:14mm;
+	width:24.75mm;
+	height:6mm;
+}
+
+#rasvoordeel{
+	top:48.7mm;
+	left:43.2mm;
+	width:35.95mm;
+	height:6mm;
+}
+
+#god{
+	top:48.7mm;
+	left:82.8mm;
+	width:28mm;
+	height:6mm;
+}
+
+#subgod{
+	top:48.7mm;
+	left:114.3mm;
+	width:28mm;
+	height:6mm;
+}
+
+#eerste_live{
+	top:67mm;
+	left:14mm;
+	width:15mm;
+	height:6mm;
+}
+
+#live_nr{
+	top:67mm;
+	left:35mm;
+	width:15mm;
+	height:6mm;
+}
+
+#xp_total{
+	top:67mm;
+	left:56mm;
+	width:15mm;
+	height:6mm;
+}
+
+#xp_spent{
+	top:78.95mm;
+	left:14mm;
+	width:15mm;
+	height:6mm;
+}
+
+#xp_remaining{
+	top:78.95mm;
+	left:35mm;
+	width:15mm;
+	height:6mm;
+}
+
+#leermeesterpunten{
+	top:78.95mm;
+	left:56mm;
+	width:15mm;
+	height:6mm;
+}
+
+#zeer-klein{
+	top:84.5mm;
+	left:88.5mm;
+}
+
+#klein{
+	top:84.5mm;
+	left:94.5mm;
+}
+
+#middel{
+	top:84.5mm;
+	left:103.5mm;
+}
+
+#groot{
+	top:84.5mm;
+	left:113.5mm;
+}
+
+#zeer-groot{
+	top:84.5mm;
+	left:127.5mm;
+}
+
+#hp_helm{
+	top:99.88mm;
+	left:31.2mm;
+	width:7.55mm;
+	height:6mm;
+}
+
+#hp_linkerarm{
+	top:108mm;
+	left:19.4mm;
+	width:7.55mm;
+	height:6mm;
+}
+
+#hp_rechterarm{
+	top:108mm;
+	left:43.15mm;
+	width:7.55mm;
+	height:6mm;
+}
+
+#hp_torso{
+	top:115.9mm;
+	left:31.2mm;
+	width:7.55mm;
+	height:6mm;
+}
+
+#hp_linkerleg{
+	top:136.65mm;
+	left:19.4mm;
+	width:7.55mm;
+	height:6mm;
+}
+
+#hp_rechterleg{
+	top:136.65mm;
+	left:43.15mm;
+	width:7.55mm;
+	height:6mm;
+}
+
+#mana{
+	top: 105.45mm;
+	left: 63.3mm;
+	width: 15mm;
+	height: 6mm;
+}
+
+#eerste_mana_live{
+	top: 105.45mm;
+	left: 88.48mm;
+	width: 15mm;
+	height: 6mm;
+}
+
+#leermeester{
+	top: 121mm;
+	left: 63.1mm;
+	width: 56.3mm;
+	height: 6mm;
+}
+
+#lvlmagie{
+	top: 140.7mm;
+	left: 71.4mm;
+	width: 17.7mm;
+	height: 6mm;
+}
+
+#lvlreligie{
+	top: 140.7mm;
+	left: 89.2mm;
+	width: 17.7mm;
+	height: 6mm;
+}
+
+#lvlambacht{
+	top: 140.7mm;
+	left: 107mm;
+	width: 17.6mm;
+	height: 6mm;
+}
+
+#xfactor{
+	top: 162mm;
+	left: 14.5mm;
+	width: 130.5mm;
+	height: 22mm;
+}
+
+#xfactornadeel{
+	top: 188.5mm;
+	left: 78.4mm;
+	width: 66.05mm;
+	height: 6mm;
+}
+
+#xfactorvoordeel{
+	top: 188.5mm;
+	left: 14.3mm;
+	width: 62.7mm;
+	height: 6mm;
+}
+
+#item{
+	top: 21.2mm;
+	left: 152mm;
+	width: 48.5mm;
+	height: 81mm;
+}
+
+#spreuken{
+	top: 21.2mm;
+	left: 208.5mm;
+	width: 74.5mm;
+	height: 130mm;
+}
+
+#opmerkingen{
+	top: 162mm;
+	left: 152.5mm;
+	width: 130.5mm;
+	height: 34mm;
+}
