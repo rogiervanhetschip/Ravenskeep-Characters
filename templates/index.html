@@ -51,15 +51,15 @@ TODO: Dode chars opvragen. Tabs?
     <th>Name character</th>
     <th>Name player</th>
   </thead>
-  {% for char in chars %}
   <tbody>
+  {% for char in chars %}
     <tr>
-      <td><input type=checkbox /></td>
+      <td class="nolink"><input type=checkbox /></td>
       <td><a href="{% url charPrintPreview char.id %}">{{ char.character_naam }}</a></td>
       <td>{{ char.speler.naam }}</td>
     </tr>
-  </tbody>
   {% endfor %}
+  </tbody>
 </table>
 {% endblock %}
 
