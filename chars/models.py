@@ -123,7 +123,7 @@ class Character(models.Model):
     if self.first_live_nr_mana == 0:
       return 0
     if self.has_mana:
-      return calc_mana(self)
+      return self.calc_mana()
     gives_mana_count = self.all_skills().filter(gives_mana=True).count()
     if gives_mana_count > 0:
       return self.calc_mana()
@@ -140,7 +140,7 @@ class Character(models.Model):
       if self.has_mana or (self.x_factor_skill and self.x_factor_skill.gives_mana):
         # ... set the starting live for his mana count to the current live
         self.first_live_nr_mana = self.live_nr
-    return super(Character, self).save(*args, **kwargs)
+    super(Character, self).save(*args, **kwargs)
 
   def __unicode__(self):
     return self.character_naam
@@ -163,17 +163,22 @@ class Player(models.Model):
   voornaam = models.CharField(max_length=50)
   tussenvoegsels = models.CharField(max_length=50, blank=True)
   achternaam = models.CharField(max_length=50)
+  name = models.CharField(max_length=150, blank=True)
 
   class Meta:
     ordering = ['voornaam', 'achternaam']
 
-  def naam(self):
-    if self.tussenvoegsels is None:
+  def get_full_name(self):
+    if self.tussenvoegsels == None or self.tussenvoegsels == '':
       return self.voornaam + " " + self.achternaam
     return self.voornaam + " " + self.tussenvoegsels + " " + self.achternaam
 
   def __unicode__(self):
-    return self.naam()
+    return self.get_full_name()
+
+  def save(self, *args, **kwargs):
+    self.name = self.get_full_name()
+    super(Player, self).save(*args, **kwargs)
 
 class Skill(models.Model):
   naam = models.CharField(max_length=50)

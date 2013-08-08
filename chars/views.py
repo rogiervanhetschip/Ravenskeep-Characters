@@ -4,9 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.forms.models import inlineformset_factory
+from django.db.models import Q
 from chars.models import Character, Item
 from chars.forms import CharacterForm
-import pdb
 
 def admin_rights(request):
   if request.user.is_staff:
@@ -18,6 +18,10 @@ def home(request):
   c = {}
   c.update(csrf(request))
   chars_complete = Character.objects.filter(dood=False)
+  if request.method == 'POST':
+    # TODO: Dit met partial postbacks oplossen?
+    search_string = request.POST['search']
+    chars_complete = chars_complete.filter(Q(character_naam__icontains=search_string) | Q(speler__name__icontains=search_string))
   p = Paginator(chars_complete, 10)
   page_nr = request.GET.get('page_nr')
   try:
