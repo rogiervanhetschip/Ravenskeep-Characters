@@ -64,7 +64,7 @@ TODO: Dode chars opvragen. Tabs?
     <tr>
       <td class="nolink"><input type=checkbox /></td>
       <td><a href="{% url charPrintPreview char.id %}">{{ char.character_naam }}</a></td>
-      <td>{{ char.speler.naam }}</td>
+      <td>{{ char.speler.get_full_name }}</td>
     </tr>
     {% endfor %}
   </tbody>
