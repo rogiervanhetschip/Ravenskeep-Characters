@@ -34,7 +34,7 @@ if [ $SOURCE != 'dev' ]
 then
   # Dump of heroku system
   echo Creating dump of $SOURCE
-  #heroku pgbackups:capture --app $SOURCE --expire
+  heroku pgbackups:capture --app $SOURCE --expire
 else
   # Dump of dev
   echo TODO...
@@ -46,7 +46,7 @@ if [ $TARGET != 'dev' ]
 then
   # Backup of heroku system
   echo Backup $TARGET
-  #heroku pgbackups:capture --app $TARGET --expire
+  heroku pgbackups:capture --app $TARGET --expire
   # Restore this backup with `heroku pgbackups:restore HEROKU_POSTGRESQL_GRAY --app $TARGET`
 else
   # Backup of dev
@@ -59,7 +59,7 @@ if [ $TARGET != 'dev' ]
 then
   # Restore in heroku system
   echo Restoring on $TARGET to database $TARGET_DATABASE
-  #heroku pgbackups:restore $TARGET_DATABASE `heroku pgbackups:url --app $TARGET`
+  heroku pgbackups:restore $TARGET_DATABASE --confirm $TARGET --app $TARGET `heroku pgbackups:url --app $SOURCE`
 else
   # Restore in dev
   echo TODO...

@@ -1,0 +1,5 @@
+1. git push herokutest develop:master
+2. heroku run python manage.py migrate chars 0028 --app ravenskeepcharstest
+3. skills aangeven die mana geven
+4. heroku run python manage.py migrate chars --app ravenskeepcharstest
+

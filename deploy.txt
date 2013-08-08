@@ -1,0 +1,6 @@
+git push myremote <mylocalbranch>:<myremotebranch>
+heroku pg:promote HEROKU_POSTGRESQL_<mycolor>
+heroku run python manage.py syncdb --app <myherokuapp>
+heroku run python manage.py migrate <mydjangoapp> --app <myherokuapp>
+./bin/copyData.sh <mysourceenv> <mytargetenv>
+
