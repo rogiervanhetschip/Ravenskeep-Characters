@@ -69,7 +69,7 @@
 				{% for spell in char.priest_spells.all %}
 					<tr>
 							<td id="tabel_naam" >{{ spell.naam }}</td>
-							<td id="tabel_xp" >{{ spell.niveau }}</td>
+							<td id="tabel_xp" >{{ spell.xp }}</td>
 							<td id="tabel_mana" >{{ spell.mana }}<td>
 					</tr>
 				{% endfor %}
@@ -78,7 +78,7 @@
 				{% for spell in char.mage_spells.all %}
 						<tr>
 							<td id="tabel_naam" >{{ spell.naam }}</td>
-							<td id="tabel_xp" >{{ spell.niveau }}</td>
+							<td id="tabel_xp" >{{ spell.xp }}</td>
 							<td id="tabel_mana" >{{ spell.mana }}<td>
 						</tr>
 					{% endfor %}
