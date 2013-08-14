@@ -237,7 +237,7 @@ class Spell(models.Model):
     return self.naam + " (" + str(self.niveau) + ")"
 
   class Meta:
-    ordering = ['naam', 'niveau']
+    ordering = ['niveau', 'naam']
 
 class PriestSpell(Spell):
   pass
