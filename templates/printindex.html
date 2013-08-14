@@ -57,13 +57,15 @@
 						</tr>
 					{% endfor %}
 			{% endif %}
+			{% if char.priest_spells.count or char.mage_spells.count %}
+			<th>Spreuken:</th>
+				<tr>
+					<th>naam</th>
+					<th>xp</th>
+					<th>mana</th>
+				</tr>
+			{% endif %}
 			{% if char.priest_spells.count %}
-					<th>Spreuken:</th>
-						<tr>
-							<th>naam</th>
-							<th>xp</th>
-							<th>mana</th>
-						</tr>
 				{% for spell in char.priest_spells.all %}
 					<tr>
 							<td id="tabel_naam" >{{ spell.name }}</td>
