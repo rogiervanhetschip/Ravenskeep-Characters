@@ -52,8 +52,8 @@
 						</tr>
 					{% for skill in char.skills.all %}
 						<tr>
-							<td id="tabel_naam" value={{ skill.naam }}></td> 
-							<td id="tabel_xp" value={{ skill.xp }}></td>
+							<td id="tabel_naam" >{{ skill.naam }}</td> 
+							<td id="tabel_xp" >{{ spell.name }}</td>
 						</tr>
 					{% endfor %}
 			{% endif %}
@@ -66,18 +66,18 @@
 						</tr>
 				{% for spell in char.priest_spells.all %}
 					<tr>
-							<td id="tabel_naam" value={{ spell.name }}></td>
-							<td id="tabel_xp" value={{ spell.niveau }}></td>
-							<td id="tabel_mana" value={{ spell.mana }} {{ spell.mana}}><td>
+							<td id="tabel_naam" >{{ spell.name }}</td>
+							<td id="tabel_xp" >{{ spell.niveau }}</td>
+							<td id="tabel_mana" >{{ spell.mana }}<td>
 					</tr>
 				{% endfor %}
 			{% endif %}
 			{% if char.mage_spells.count %}
 				{% for spell in char.mage_spells.all %}
 						<tr>
-							<td id="tabel_naam" value={{ spell.name }}></td>
-							<td id="tabel_xp" value={{ spell.niveau }}></td>
-							<td id="tabel_mana" value={{ spell.mana }}><td>
+							<td id="tabel_naam" >{{ spell.name }}</td>
+							<td id="tabel_xp" >{{ spell.niveau }}</td>
+							<td id="tabel_mana" >{{ spell.mana }}<td>
 						</tr>
 					{% endfor %}
 				{% endif %}
@@ -90,8 +90,8 @@
 						</tr>
 					{% for recipe in char.recipes.all %}
 						<tr>
-							<td id="tabel_recept" value={{ recipe.name }}></td>
-							<td id="tabel_mana" value={{ recipe.code }}></td>
+							<td id="tabel_recept" >{{ recipe.name }}</td>
+							<td id="tabel_mana" >{{ recipe.code }}</td>
 						</tr>
 					{% endfor %}
 			{% endif %}
@@ -104,7 +104,7 @@
 					<th>Bezittingen:</th>
 				{% for item in char.item.all %}
 					<tr>
-							<td value={{ item.naam }}></td>
+							<td>{{ item.naam }}</td>
 					</tr>
 				{% endfor %}
 			{% endif %}
