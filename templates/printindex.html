@@ -8,8 +8,8 @@
 <body>
   {% for char in chars %}
 	<form method="get">
-		<input class="absolute" id="speler" name="speler" value={{ char.speler.name }}>
-		<input class="absolute" id="character_naam" name="character_naam" value={{ char.character_naam }}>
+		<input class="absolute" id="speler" name="speler" value="{{ char.speler.name }}">
+		<input class="absolute" id="character_naam" name="character_naam" value="{{ char.character_naam }}">
 		<input class="absolute" id="ras" name="ras" value={{ char.ras.naam }}>
 		<input class="absolute" id="rasvoordeel" name="rasvoordeel" value={{ char.ras.skill }}>
 		<input class="absolute" id="god" name="god" value={{ char.god.naam }}>
