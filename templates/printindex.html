@@ -41,8 +41,8 @@
 		<textarea class="absolute" id="opmerkingen" name="opmerkingen" value={{ char.opmerkingen }}></textarea>
 	</form>
 
-<div id="tabelrechts">
-	<table id="vsr_lijst">
+	<div id="tabelrechts">
+		<table id="vsr_lijst">
 			{% if char.skills.count %}
 					<th>Vaardigheden:</th>
 						<tr>
@@ -76,43 +76,43 @@
 			{% endif %}
 			{% if char.mage_spells.count %}
 				{% for spell in char.mage_spells.all %}
-						<tr>
-							<td id="tabel_naam" >{{ spell.naam }}</td>
-							<td id="tabel_xp" >{{ spell.xp }}</td>
-							<td id="tabel_mana" >{{ spell.mana }}<td>
-						</tr>
-					{% endfor %}
-				{% endif %}
+					<tr>
+						<td id="tabel_naam" >{{ spell.naam }}</td>
+						<td id="tabel_xp" >{{ spell.xp }}</td>
+						<td id="tabel_mana" >{{ spell.mana }}<td>
+					</tr>
+				{% endfor %}
+			{% endif %}
 			{% if char.recipes.count %}
 				<th>Recepten:</th>
+				<tr>
+					<th>naam</th>
+					<th></th>
+					<th>code</th>
+				</tr>
+				{% for recipe in char.recipes.all %}
 					<tr>
-						<th>naam</th>
-						<th></th>
-						<th>code</th>
+						<td id="tabel_recept" >{{ recipe.name }}</td>
+						<td id="tabel_xp"></td>
+						<td id="tabel_mana" >{{ recipe.code }}</td>
 					</tr>
-					{% for recipe in char.recipes.all %}
-						<tr>
-							<td id="tabel_recept" >{{ recipe.name }}</td>
-							<td id="tabel_xp"></td>
-							<td id="tabel_mana" >{{ recipe.code }}</td>
-						</tr>
-					{% endfor %}
+				{% endfor %}
 			{% endif %}
 		</table>
 	</div>
-
+	
 	<div>
 		<table id="eigendom_lijst">
 			{% if char.items.count %}
 					<th>Bezittingen:</th>
 				{% for item in char.items.all %}
 					<tr>
-							<td>{{ item.naam }}</td>
+						<td>{{ item.naam }}</td>
 					</tr>
 				{% endfor %}
 			{% endif %}
 		</table>
-  	</div>
-  <span class="pagebreak"></span>
+	</div>
+     <span class="pagebreak"></span>
   {% endfor %}
 </body>
