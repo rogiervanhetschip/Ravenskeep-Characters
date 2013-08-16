@@ -53,7 +53,7 @@
 					{% for skill in char.skills.all %}
 						<tr>
 							<td id="tabel_naam" >{{ skill.naam }}</td> 
-							<td id="tabel_xp" >{{ spell.name }}</td>
+							<td id="tabel_xp" >{{ skill.xp }}</td>
 						</tr>
 					{% endfor %}
 			{% endif %}
@@ -84,15 +84,16 @@
 					{% endfor %}
 				{% endif %}
 			{% if char.recipes.count %}
-					<th>Recepten:</th>
-						<tr>
-							<th>naam</th>
-							<th></th>
-							<th>code</th>
-						</tr>
+				<th>Recepten:</th>
+					<tr>
+						<th>naam</th>
+						<th></th>
+						<th>code</th>
+					</tr>
 					{% for recipe in char.recipes.all %}
 						<tr>
 							<td id="tabel_recept" >{{ recipe.name }}</td>
+							<td id="tabel_xp"></td>
 							<td id="tabel_mana" >{{ recipe.code }}</td>
 						</tr>
 					{% endfor %}
