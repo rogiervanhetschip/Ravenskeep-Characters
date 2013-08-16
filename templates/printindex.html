@@ -8,12 +8,12 @@
 <body>
   {% for char in chars %}
 	<form method="get">
-		<input class="absolute" id="speler" name="speler" value={{ char.speler.name }}>
-		<input class="absolute" id="character_naam" name="character_naam" value={{ char.character_naam }}>
+		<input class="absolute" id="speler" name="speler" value="{{ char.speler.name }}">
+		<input class="absolute" id="character_naam" name="character_naam" value="{{ char.character_naam }}">
 		<input class="absolute" id="ras" name="ras" value={{ char.ras.naam }}>
 		<input class="absolute" id="rasvoordeel" name="rasvoordeel" value={{ char.ras.skill }}>
 		<input class="absolute" id="god" name="god" value={{ char.god.naam }}>
-		<input class="absolute" id="subgod" name="subgod" value={% if char.subgod %} ( Subgod: {{ char.subgod.naam }} ){% endif %}>
+		<input class="absolute" id="subgod" name="subgod" value={% if char.subgod %}{{ char.subgod.naam }}{% endif %}>
 		<input class="absolute" id="eerste_live" name="eerste_live" value={{ char.eerste_live }}>
 		<input class="absolute" id="live_nr" name="live_nr" value={{ char.live_nr }}>
 		<input class="absolute" id="xp_total" name="xp_total" value={{ char.xp_total }}>
@@ -38,11 +38,11 @@
 		<input class="absolute" id="lvlreligie" name="lvlreligie">
 		<input class="absolute" id="lvlambacht" name="lvlambacht">
 		<textarea class="absolute" id="xfactor" name="xfactor" value={{ char.x_factor_skill }} {{ char.ras.skill }}></textarea>
-		<textarea class="absolute" id="opmerkingen" name="opmerkingen" value={{ char.opmerkingen|linebreaks }}></textarea>
+		<textarea class="absolute" id="opmerkingen" name="opmerkingen" value={{ char.opmerkingen }}></textarea>
 	</form>
 
-<div id="tabelrechts">
-	<table id="vsr_lijst">
+	<div id="tabelrechts">
+		<table id="vsr_lijst">
 			{% if char.skills.count %}
 					<th>Vaardigheden:</th>
 						<tr>
@@ -53,7 +53,7 @@
 					{% for skill in char.skills.all %}
 						<tr>
 							<td id="tabel_naam" >{{ skill.naam }}</td> 
-							<td id="tabel_xp" >{{ spell.name }}</td>
+							<td id="tabel_xp" >{{ skill.xp }}</td>
 						</tr>
 					{% endfor %}
 			{% endif %}
@@ -76,42 +76,43 @@
 			{% endif %}
 			{% if char.mage_spells.count %}
 				{% for spell in char.mage_spells.all %}
-						<tr>
-							<td id="tabel_naam" >{{ spell.naam }}</td>
-							<td id="tabel_xp" >{{ spell.xp }}</td>
-							<td id="tabel_mana" >{{ spell.mana }}<td>
-						</tr>
-					{% endfor %}
-				{% endif %}
-			{% if char.recipes.count %}
-					<th>Recepten:</th>
-						<tr>
-							<th>naam</th>
-							<th></th>
-							<th>code</th>
-						</tr>
-					{% for recipe in char.recipes.all %}
-						<tr>
-							<td id="tabel_recept" >{{ recipe.name }}</td>
-							<td id="tabel_mana" >{{ recipe.code }}</td>
-						</tr>
-					{% endfor %}
-			{% endif %}
-		</table>
-	</div>
-
-	<div>
-		<table class="tabel" id="eigendom_lijst">
-			{% if char.items.count %}
-					<th>Bezittingen:</th>
-				{% for item in char.item.all %}
 					<tr>
-							<td>{{ item.naam }}</td>
+						<td id="tabel_naam" >{{ spell.naam }}</td>
+						<td id="tabel_xp" >{{ spell.xp }}</td>
+						<td id="tabel_mana" >{{ spell.mana }}<td>
+					</tr>
+				{% endfor %}
+			{% endif %}
+			{% if char.recipes.count %}
+				<th>Recepten:</th>
+				<tr>
+					<th>naam</th>
+					<th></th>
+					<th>code</th>
+				</tr>
+				{% for recipe in char.recipes.all %}
+					<tr>
+						<td id="tabel_recept" >{{ recipe.name }}</td>
+						<td id="tabel_xp"></td>
+						<td id="tabel_mana" >{{ recipe.code }}</td>
 					</tr>
 				{% endfor %}
 			{% endif %}
 		</table>
-  </div>
-  <span class="pagebreak"></span>
+	</div>
+	
+	<div>
+		<table id="eigendom_lijst">
+			{% if char.items.count %}
+					<th>Bezittingen:</th>
+				{% for item in char.items.all %}
+					<tr>
+						<td>{{ item.naam }}</td>
+					</tr>
+				{% endfor %}
+			{% endif %}
+		</table>
+	</div>
+     <span class="pagebreak"></span>
   {% endfor %}
 </body>
