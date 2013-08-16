@@ -38,7 +38,7 @@
 		<input class="absolute" id="lvlreligie" name="lvlreligie">
 		<input class="absolute" id="lvlambacht" name="lvlambacht">
 		<textarea class="absolute" id="xfactor" name="xfactor" value={{ char.x_factor_skill }} {{ char.ras.skill }}></textarea>
-		<textarea class="absolute" id="opmerkingen" name="opmerkingen" value={{ char.opmerkingen|linebreaks }}></textarea>
+		<textarea class="absolute" id="opmerkingen" name="opmerkingen" value={{ char.opmerkingen }}></textarea>
 	</form>
 
 <div id="tabelrechts">
@@ -101,17 +101,17 @@
 	</div>
 
 	<div>
-		<table class="tabel" id="eigendom_lijst">
+		<table id="eigendom_lijst">
 			{% if char.items.count %}
 					<th>Bezittingen:</th>
-				{% for item in char.item.all %}
+				{% for item in char.items.all %}
 					<tr>
 							<td>{{ item.naam }}</td>
 					</tr>
 				{% endfor %}
 			{% endif %}
 		</table>
-  </div>
+  	</div>
   <span class="pagebreak"></span>
   {% endfor %}
 </body>
