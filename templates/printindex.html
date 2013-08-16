@@ -13,7 +13,7 @@
 		<input class="absolute" id="ras" name="ras" value={{ char.ras.naam }}>
 		<input class="absolute" id="rasvoordeel" name="rasvoordeel" value={{ char.ras.skill }}>
 		<input class="absolute" id="god" name="god" value={{ char.god.naam }}>
-		<input class="absolute" id="subgod" name="subgod" value={% if char.subgod %} ( Subgod: {{ char.subgod.naam }} ){% endif %}>
+		<input class="absolute" id="subgod" name="subgod" value={% if char.subgod %}{{ char.subgod.naam }}{% endif %}>
 		<input class="absolute" id="eerste_live" name="eerste_live" value={{ char.eerste_live }}>
 		<input class="absolute" id="live_nr" name="live_nr" value={{ char.live_nr }}>
 		<input class="absolute" id="xp_total" name="xp_total" value={{ char.xp_total }}>
