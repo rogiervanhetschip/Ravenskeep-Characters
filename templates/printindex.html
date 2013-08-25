@@ -102,10 +102,10 @@
 	</div>
 	
 	<div>
-		<table id="eigendom_lijst">
-			{% if char.items.count %}
+    <table id="eigendom_lijst">
+			{% if char.item_set.count %}
 					<th>Bezittingen:</th>
-				{% for item in char.items.all %}
+				{% for item in char.item_set.all %}
 					<tr>
 						<td>{{ item.naam }}</td>
 					</tr>
