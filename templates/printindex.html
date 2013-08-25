@@ -11,7 +11,7 @@
 		<input class="absolute" id="speler" name="speler" value="{{ char.speler.name }}">
 		<input class="absolute" id="character_naam" name="character_naam" value="{{ char.character_naam }}">
 		<input class="absolute" id="ras" name="ras" value={{ char.ras.naam }}>
-		<input class="absolute" id="rasvoordeel" name="rasvoordeel" value={{ char.ras.skill }}>
+    <input class="absolute" id="rasvoordeel" name="rasvoordeel" value="{% if char.ras.skill %}{{ char.ras.skill.naam }}{% endif %}{% if char.ras.skill and char.ras.xp_extra %} - {% endif %}{% if char.ras.xp_extra %}+ 1 XP{% endif %}">
 		<input class="absolute" id="god" name="god" value={{ char.god.naam }}>
 		<input class="absolute" id="subgod" name="subgod" value={% if char.subgod %}{{ char.subgod.naam }}{% endif %}>
 		<input class="absolute" id="eerste_live" name="eerste_live" value={{ char.eerste_live }}>
