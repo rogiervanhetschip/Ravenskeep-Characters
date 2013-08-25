@@ -37,8 +37,8 @@
 		<input class="absolute" id="lvlmagie" name="lvlmagie">
 		<input class="absolute" id="lvlreligie" name="lvlreligie">
 		<input class="absolute" id="lvlambacht" name="lvlambacht">
-		<textarea class="absolute" id="xfactor" name="xfactor" value={{ char.x_factor_skill }} {{ char.ras.skill }}></textarea>
-		<textarea class="absolute" id="opmerkingen" name="opmerkingen" value={{ char.opmerkingen }}></textarea>
+    <textarea class="absolute" id="xfactor" name="xfactor">{% if char.x_factor_skill %}{{ char.x_factor_skill }}{% endif %}{% if char.x_factor_skill and char.x_factor %} - {% endif %}{{ char.x_factor }}</textarea>
+		<textarea class="absolute" id="opmerkingen" name="opmerkingen">{{ char.opmerkingen }}</textarea>
 	</form>
 
 	<div id="tabelrechts">
