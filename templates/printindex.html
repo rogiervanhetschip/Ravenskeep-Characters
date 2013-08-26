@@ -2,23 +2,24 @@
 <html lang="nl">
 <head>
 	<title>Character sheet</title>
-	<link href="/static/css/printindex.css" rel="stylesheet" type="text/css">
+	<link href="../static/css/printindex.css" rel="stylesheet" type="text/css">
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 </head>
 <body>
   {% for char in chars %}
+  <div id="A4">
 	<form method="get">
 		<input class="absolute" id="speler" name="speler" value="{{ char.speler.name }}">
 		<input class="absolute" id="character_naam" name="character_naam" value="{{ char.character_naam }}">
-		<input class="absolute" id="ras" name="ras" value={{ char.ras.naam }}>
-		<input class="absolute" id="rasvoordeel" name="rasvoordeel" value={{ char.ras.skill }}>
-		<input class="absolute" id="god" name="god" value={{ char.god.naam }}>
-		<input class="absolute" id="subgod" name="subgod" value={% if char.subgod %}{{ char.subgod.naam }}{% endif %}>
-		<input class="absolute" id="eerste_live" name="eerste_live" value={{ char.eerste_live }}>
-		<input class="absolute" id="live_nr" name="live_nr" value={{ char.live_nr }}>
-		<input class="absolute" id="xp_total" name="xp_total" value={{ char.xp_total }}>
-		<input class="absolute" id="xp_spent" name="xp_spent" value={{ char.xp_spent }}>
-		<input class="absolute" id="xp_remaining" name="xp_remaining" value={{ char.xp_remaining }}>
+		<input class="absolute" id="ras" name="ras" value="{{ char.ras.naam }}">
+		<input class="absolute" id="rasvoordeel" name="rasvoordeel" value="{{ char.ras.skill }}">
+		<input class="absolute" id="god" name="god" value="{{ char.god.naam }}">
+		<input class="absolute" id="subgod" name="subgod" value="{% if char.subgod %}{{ char.subgod.naam }}{% endif %}">
+		<input class="absolute" id="eerste_live" name="eerste_live" value="{{ char.eerste_live }}">
+		<input class="absolute" id="live_nr" name="live_nr" value="{{ char.live_nr }}">
+		<input class="absolute" id="xp_total" name="xp_total" value="{{ char.xp_total }}">
+		<input class="absolute" id="xp_spent" name="xp_spent" value="{{ char.xp_spent }}">
+		<input class="absolute" id="xp_remaining" name="xp_remaining" value="{{ char.xp_remaining }}">
 		<input class="absolute" id="leermeesterpunten" name="leermeesterpunten">
 		<input class="absolute" id="zeer-klein" type="radio" name="grootte" value="zeer-klein">
 		<input class="absolute" id="klein" type="radio" name="grootte" value="klein">
@@ -31,14 +32,14 @@
 		<input class="absolute" id="hp_torso" name="hp_torso" value={{ char.hitpoints }}>
 		<input class="absolute" id="hp_linkerbeen" name="hp_linkerbeen" value={{ char.hitpoints }}>
 		<input class="absolute" id="hp_rechterbeen" name="hp_rechterbeen" value={{ char.hitpoints }}>
-		<input class="absolute" id="mana" name="mana" value={{ char.mana }}>
-		<input class="absolute" id="eerste_mana_live" name="eerste_mana_live" value={{ char.eerste_mana_life }}>
+		<input class="absolute" id="mana" name="mana" value="{{ char.mana }}">
+		<input class="absolute" id="eerste_mana_live" name="eerste_mana_live" value="{{ char.eerste_mana_life }}">
 		<input class="absolute" id="leermeester" name="leermeester">
 		<input class="absolute" id="lvlmagie" name="lvlmagie">
 		<input class="absolute" id="lvlreligie" name="lvlreligie">
 		<input class="absolute" id="lvlambacht" name="lvlambacht">
-		<textarea class="absolute" id="xfactor" name="xfactor" value={{ char.x_factor_skill }} {{ char.ras.skill }}></textarea>
-		<textarea class="absolute" id="opmerkingen" name="opmerkingen" value={{ char.opmerkingen }}></textarea>
+		<textarea class="absolute" id="xfactor" name="xfactor" value="{{char.x_factor}}{{ char.x_factor_skill }} Ras skill: {{ char.ras.skill }}"></textarea>
+		<textarea class="absolute" id="opmerkingen" name="opmerkingen" value="{{ char.opmerkingen }}"></textarea>
 	</form>
 
 	<div id="tabelrechts">
@@ -115,4 +116,5 @@
 	</div>
      <span class="pagebreak"></span>
   {% endfor %}
+</div>
 </body>
