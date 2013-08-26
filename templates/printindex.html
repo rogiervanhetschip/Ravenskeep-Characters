@@ -62,7 +62,7 @@
 			<th>Spreuken:</th>
 				<tr>
 					<th>naam</th>
-					<th>xp</th>
+					<th>niveau</th>
 					<th>mana</th>
 				</tr>
 			{% endif %}
@@ -70,7 +70,7 @@
 				{% for spell in char.priest_spells.all %}
 					<tr>
 							<td id="tabel_naam" >{{ spell.naam }}</td>
-							<td id="tabel_xp" >{{ spell.xp }}</td>
+							<td id="tabel_xp" >{{ spell.niveau }}</td>
 							<td id="tabel_mana" >{{ spell.mana }}<td>
 					</tr>
 				{% endfor %}
@@ -79,7 +79,7 @@
 				{% for spell in char.mage_spells.all %}
 					<tr>
 						<td id="tabel_naam" >{{ spell.naam }}</td>
-						<td id="tabel_xp" >{{ spell.xp }}</td>
+						<td id="tabel_xp" >{{ spell.niveau }}</td>
 						<td id="tabel_mana" >{{ spell.mana }}<td>
 					</tr>
 				{% endfor %}
@@ -104,9 +104,9 @@
 	
 	<div>
 		<table id="eigendom_lijst">
-			{% if char.Items.count %}
+			{% if char.items.count %}
 					<th>Bezittingen:</th>
-				{% for item in char.Items.all %}
+				{% for item in char.items.all %}
 					<tr>
 						<td>{{ item.naam }}</td>
 					</tr>

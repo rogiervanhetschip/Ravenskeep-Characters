@@ -1,10 +1,6 @@
-#A4{
-	width:297mm;
-	height:210mm;
-	padding:0mm;
+body{
 	margin:0px;
-	background:url('../images/printindexbg.png') no-repeat left top;
-	background-size:297mm 210mm;
+	padding:0px;
 }
 
 textarea{
@@ -35,6 +31,15 @@ input[type="radio"]{
 	/*background-color: transparent;*/
 	border: solid black 1px;
 	resize: none;
+}
+
+#A4{
+	width:297mm;
+	height:210mm;
+	padding:0mm;
+	margin:0px;
+	background:url('../images/printindexbg.png') no-repeat left top;
+	background-size:297mm 210mm;
 }
 
 #logo{
