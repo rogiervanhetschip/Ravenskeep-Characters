@@ -12,7 +12,7 @@
 		<input class="absolute" id="speler" name="speler" value="{{ char.speler.name }}">
 		<input class="absolute" id="character_naam" name="character_naam" value="{{ char.character_naam }}">
 		<input class="absolute" id="ras" name="ras" value="{{ char.ras.naam }}">
-		<input class="absolute" id="rasvoordeel" name="rasvoordeel" value="{{ char.ras.skill }}">
+		<input class="absolute" id="rasvoordeel" name="rasvoordeel" value="{% if char.ras.skill %}{{ char.ras.skill.naam }}{% endif %}{% if char.ras.skill and char.ras.xp_extra %} - {% endif %}{% if char.ras.xp_extra %}+ 1 XP{% endif %}">
 		<input class="absolute" id="god" name="god" value="{{ char.god.naam }}">
 		<input class="absolute" id="subgod" name="subgod" value="{% if char.subgod %}{{ char.subgod.naam }}{% endif %}">
 		<input class="absolute" id="eerste_live" name="eerste_live" value="{{ char.eerste_live }}">
@@ -26,19 +26,19 @@
 		<input class="absolute" id="middel" type="radio" name="grootte" value="middel">
 		<input class="absolute" id="groot" type="radio" name="grootte" value="groot">
 		<input class="absolute" id="zeer-groot" type="radio" name="grootte" value="zeer-groot">
-		<input class="absolute" id="hp_helm" name="hp_helm" value="{{ char.hitpoints }}">
+		<input class="absolute" id="hp_helm" name="hp_helm">
 		<input class="absolute" id="hp_linkerarm" name="hp_linkerarm" value="{{ char.hitpoints }}">
 		<input class="absolute" id="hp_rechterarm" name="hp_rechterarm" value="{{ char.hitpoints }}">
 		<input class="absolute" id="hp_torso" name="hp_torso" value="{{ char.hitpoints }}">
 		<input class="absolute" id="hp_linkerbeen" name="hp_linkerbeen" value="{{ char.hitpoints }}">
 		<input class="absolute" id="hp_rechterbeen" name="hp_rechterbeen" value="{{ char.hitpoints }}">
 		<input class="absolute" id="mana" name="mana" value="{{ char.mana }}">
-		<input class="absolute" id="eerste_mana_live" name="eerste_mana_live" value="{{ char.eerste_mana_life }}">
+		<input class="absolute" id="eerste_mana_live" name="eerste_mana_live" value="{{ char.first_live_nr_mana }}">
 		<input class="absolute" id="leermeester" name="leermeester">
 		<input class="absolute" id="lvlmagie" name="lvlmagie">
 		<input class="absolute" id="lvlreligie" name="lvlreligie">
 		<input class="absolute" id="lvlambacht" name="lvlambacht">
-		<textarea class="absolute" id="xfactor" name="xfactor">{{char.x_factor}} <br/> X - Factor Skill: {{ char.x_factor_skill }}</textarea>
+		<textarea class="absolute" id="xfactor" name="xfactor">{% if char.x_factor_skill %}{{ char.x_factor_skill }}{% endif %}{% if char.x_factor_skill and char.x_factor %} - {% endif %}{{ char.x_factor }}</textarea>
 		<textarea class="absolute" id="opmerkingen" name="opmerkingen">{{ char.opmerkingen }}</textarea>
 	</form>
 
@@ -84,7 +84,20 @@
 					</tr>
 				{% endfor %}
 			{% endif %}
-			{% if char.recipes.count %}
+		</table>
+	</div>
+	
+	<div>
+		<table id="eigendom_lijst">
+			{% if char.item_set.count %}
+					<th>Bezittingen:</th>
+				{% for item in char.item_set.all %}
+					<tr>
+						<td>{{ item.naam }}</td>
+					</tr>
+				{% endfor %}
+			{% endif %}
+						{% if char.recipes.count %}
 				<th>Recepten:</th>
 				<tr>
 					<th>naam</th>
@@ -96,19 +109,6 @@
 						<td id="tabel_recept" >{{ recipe.name }}</td>
 						<td id="tabel_xp"></td>
 						<td id="tabel_mana" >{{ recipe.code }}</td>
-					</tr>
-				{% endfor %}
-			{% endif %}
-		</table>
-	</div>
-	
-	<div>
-		<table id="eigendom_lijst">
-			{% if char.items.count %}
-					<th>Bezittingen:</th>
-				{% for item in char.items.all %}
-					<tr>
-						<td>{{ item.naam }}</td>
 					</tr>
 				{% endfor %}
 			{% endif %}
