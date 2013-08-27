@@ -131,7 +131,7 @@ class Character(models.Model):
 
   def calc_mana(self):
     aggregate_mana = self.all_skills().aggregate(Sum('extra_mana'))
-    return 5 + (self.live_nr - self.first_live_nr_mana) + aggregate_mana['extra_mana__sum']
+    return 6 + (self.live_nr - self.first_live_nr_mana) + aggregate_mana['extra_mana__sum']
 
   def save(self, *args, **kwargs):
     # If a character does not have a starting live for his mana count,
