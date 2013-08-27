@@ -24,7 +24,7 @@ class Character(models.Model):
   subgod = models.ForeignKey('God', null=True, blank=True, related_name='subgod_character')
   skills = models.ManyToManyField('Skill', null=True, blank=True, related_name='skills')
   opmerkingen = models.TextField(blank=True)
-  x_factor = models.CharField(max_length=250, blank=True)
+  x_factor = models.CharField(max_length=500, blank=True)
   x_factor_skill = models.ForeignKey('Skill', null=True, blank=True, related_name='x_factor_skill')
   mage_spells = models.ManyToManyField('MageSpell', null=True, blank=True, related_name='MageSpells')
   priest_spells = models.ManyToManyField('PriestSpell', null=True, blank=True, related_name='Priest_Spells')
