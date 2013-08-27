@@ -75,7 +75,7 @@
 					<div class="lW" style="width:0px;"></div>
 					<div class="lW" style="width:0px;"></div>
 					<div class="lW" style="width:0px;"></div>
-					<p>{{ char.opmerkingen }}</p>
+					<p>{{ char.opmerkingen|linebreaksbr }} }}</p>
 				</div>
 			<textarea class="absolute" id="xfactor" name="xfactor">{{ char.x_factor }}{% if char.x_factor_skill and char.x_factor %}&#10;&#10;{% endif %}{% if char.x_factor_skill %}X - Factor Skill: {{ char.x_factor_skill }}{% endif %}</textarea>
 			
