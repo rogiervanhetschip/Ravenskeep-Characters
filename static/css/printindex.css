@@ -330,19 +330,14 @@ input[type="radio"]{
 .tabel_naam{
 	width: 70%
 }
+
 .lW {
-	position: absolute;
-	top: 128mm;
-	left: 152.5mm;
 	float: left; 
 	clear: left; 
 	height: 15px; 
 }
 
 .rW { 
-	position: absolute;
-	top: 128mm;
-	left: 152.5mm;
 	float: right; 
 	clear: right; 
 	height: 15px; 
