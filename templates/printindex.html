@@ -6,7 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 </head>
 <body>
-  {% for char in chars %}
+ {% for char in chars %}
   <div id="A4">
 	<form method="get">
 		<input class="absolute" id="speler" name="speler" value="{{ char.speler.name }}">
@@ -56,58 +56,58 @@
 		<input class="absolute" id="lvlreligie" name="lvlreligie">
 		<input class="absolute" id="lvlambacht" name="lvlambacht">
 		<textarea class="absolute" id="xfactor" name="xfactor">{{ char.x_factor }}{% if char.x_factor_skill and char.x_factor %}&#10;&#10;{% endif %}{% if char.x_factor_skill %}X - Factor Skill: {{ char.x_factor_skill }}{% endif %}</textarea>
-		<textarea class="absolute" id="opmerkingen" name="opmerkingen">{{ char.opmerkingen.strip|safe|removetags: "p img" }}</textarea>
+		<textarea class="absolute" id="opmerkingen" name="opmerkingen">{{ char.opmerkingen.strip|safe|removetags:"p img" }}</textarea>
 
 
-	<div id="tabelrechts">
-		<table id="s_lijst">
-			{% if char.priest_spells.count or char.mage_spells.count %}
-				<tr>
-					<th colspan="3">Spreuken:</th>
-				</tr>
-				<tr>
-					<th>naam</th>
-					<th>niveau</th>
-					<th>mana</th>
-				</tr>
-				{% if char.priest_spells.count %}
-					{% for spell in char.priest_spells.all %}
+		<div id="tabelrechts">
+			<table id="s_lijst">
+				{% if char.priest_spells.count or char.mage_spells.count %}
 					<tr>
-							<td class="tabel_naam" >{{ spell.naam }}</td>
-							<td class="tabel_xp" >{{ spell.niveau }}</td>
-							<td class="tabel_mana" >{{ spell.mana }}<td>
-					</tr>	
-					{% endfor %}
+						<th colspan="3">Spreuken:</th>
+					</tr>
+					<tr>
+						<th>naam</th>
+						<th>niveau</th>
+						<th>mana</th>
+					</tr>
+					{% if char.priest_spells.count %}
+						{% for spell in char.priest_spells.all %}
+							<tr>
+								<td class="tabel_naam" >{{ spell.naam }}</td>
+								<td class="tabel_xp" >{{ spell.niveau }}</td>
+								<td class="tabel_mana" >{{ spell.mana }}<td>
+							</tr>	
+						{% endfor %}
+					{% endif %}
+					{% if char.mage_spells.count %}
+						{% for spell in char.mage_spells.all %}
+							<tr>
+								<td class="tabel_naam" >{{ spell.naam }}</td>
+								<td class="tabel_xp" >{{ spell.niveau }}</td>
+								<td class="tabel_mana" >{{ spell.mana }}<td>
+							</tr>
+						{% endfor %}
+					{% endif %}
 				{% endif %}
-				{% if char.mage_spells.count %}
-					{% for spell in char.mage_spells.all %}
+			</table>
+			<table id="v_lijst">
+				{% if char.skills.count %}
+					<tr>
+						<th colspan="2">Vaardigheden:</th>
+					</tr>
+					<tr>
+						<th>naam</th>
+						<th>xp</th>
+					</tr>	
+					{% for skill in char.skills.all %}
 						<tr>
-							<td class="tabel_naam" >{{ spell.naam }}</td>
-							<td class="tabel_xp" >{{ spell.niveau }}</td>
-							<td class="tabel_mana" >{{ spell.mana }}<td>
+							<td class="tabel_naam" >{{ skill.naam }}</td> 
+							<td class="tabel_xp" >{{ skill.xp }}</td>
 						</tr>
 					{% endfor %}
 				{% endif %}
-			{% endif %}
-		</table>
-		<table id="v_lijst">
-			{% if char.skills.count %}
-				<tr>
-					<th colspan="2">Vaardigheden:</th>
-				</tr>
-				<tr>
-					<th>naam</th>
-					<th>xp</th>
-				</tr>	
-				{% for skill in char.skills.all %}
-					<tr>
-						<td class="tabel_naam" >{{ skill.naam }}</td> 
-						<td class="tabel_xp" >{{ skill.xp }}</td>
-					</tr>
-				{% endfor %}
-			{% endif %}
-		</table>
-	</div>
+			</table>
+		</div>
 </form>	
 	<div>
 		<table id="eigendom_lijst">
@@ -140,6 +140,6 @@
 		</table>
 	</div>
      <span class="pagebreak"></span>
-  {% endfor %}
+ {% endfor %}
 </div>
 </body>
