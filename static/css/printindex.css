@@ -297,7 +297,7 @@ input[type="radio"]{
 }
 
 #vsr_lijst{
-	border: none;
+	border: 1px black solid;
 	position: absolute;
 	left: 208mm;
 	top:  16mm;

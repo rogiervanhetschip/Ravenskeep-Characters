@@ -57,7 +57,7 @@
 		<input class="absolute" id="lvlambacht" name="lvlambacht">
 		<textarea class="absolute" id="xfactor" name="xfactor">{{ char.x_factor }}{% if char.x_factor_skill and char.x_factor %}&#10;&#10;{% endif %}{% if char.x_factor_skill %}X - Factor Skill: {{ char.x_factor_skill }}{% endif %}</textarea>
 		<textarea class="absolute" id="opmerkingen" name="opmerkingen">{{ char.opmerkingen }}</textarea>
-	</form>
+
 
 	<div id="tabelrechts">
 		<table id="vsr_lijst">
@@ -103,7 +103,7 @@
 			{% endif %}
 		</table>
 	</div>
-	
+</form>	
 	<div>
 		<table id="eigendom_lijst">
 			{% if char.item_set.count %}
