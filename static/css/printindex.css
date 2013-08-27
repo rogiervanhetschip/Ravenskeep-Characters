@@ -333,13 +333,13 @@ input[type="radio"]{
 .lW {
 	float: left; 
 	clear: left; 
-	height: 15px; 
+	height: 14px; 
 }
 
 .rW { 
 	float: right; 
 	clear: right; 
-	height: 15px; 
+	height: 14px; 
 }
 .pagebreak
 {
