@@ -293,23 +293,23 @@ input[type="radio"]{
 	position: absolute;
 	left: 152.3mm;
 	top:  16mm;
-	width: 48.5mm;
+	width: 44mm;
 }
 
 #v_lijst{
 	border: 1px black solid;
 	position: absolute;
-	left: 207mm;
+	left: 203mm;
 	top:  16mm;
-	width: 31mm;
+	width: 35mm;
 }
 
 #s_lijst{
 	border: 1px black solid;
 	position: absolute;
-	left: 238mm;
+	left: 239mm;
 	top:  16mm;
-	width: 46mm;
+	width: 47mm;
 }
 
 .tabel_recept{
