@@ -30,8 +30,39 @@ input[type="radio"]{
 	font-size: 3mm;
 	position: absolute;
 	/*background-color: transparent;*/
-	border: solid black 1px;
 	resize: none;
+}
+
+.tabel_recept{
+	width: 80%;
+}
+
+.tabel_mana{
+	width: 20%
+}
+
+.tabel_xp{
+	width: 10%
+}
+
+.tabel_naam{
+	width: 70%
+}
+
+.lW {
+	float: left; 
+	clear: left; 
+	height: 14px; 
+}
+
+.rW { 
+	float: right; 
+	clear: right; 
+	height: 14px; 
+}
+.pagebreak
+{
+  page-break-after: always;
 }
 
 #A4{
@@ -287,6 +318,7 @@ input[type="radio"]{
 	left: 152.5mm;
 	width: 130.5mm;
 	height: 67mm;
+	border: none;
 }
 
 #eigendom_lijst{
@@ -312,36 +344,3 @@ input[type="radio"]{
 	top:  16mm;
 	width: 47mm;
 }
-
-.tabel_recept{
-	width: 80%;
-}
-
-.tabel_mana{
-	width: 20%
-}
-
-.tabel_xp{
-	width: 10%
-}
-
-.tabel_naam{
-	width: 70%
-}
-
-.lW {
-	float: left; 
-	clear: left; 
-	height: 14px; 
-}
-
-.rW { 
-	float: right; 
-	clear: right; 
-	height: 14px; 
-}
-.pagebreak
-{
-  page-break-after: always;
-}
-
