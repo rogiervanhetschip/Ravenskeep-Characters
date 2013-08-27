@@ -55,7 +55,7 @@
 		<input class="absolute" id="lvlmagie" name="lvlmagie">
 		<input class="absolute" id="lvlreligie" name="lvlreligie">
 		<input class="absolute" id="lvlambacht" name="lvlambacht">
-		<textarea class="absolute" id="xfactor" name="xfactor">{% if char.x_factor_skill %}X - Factor Skill: {{ char.x_factor_skill }}{% endif %}{% if char.x_factor_skill and char.x_factor %} <br> {% endif %}{{ char.x_factor }}</textarea>
+		<textarea class="absolute" id="xfactor" name="xfactor">{% if char.x_factor_skill %}X - Factor Skill: {{ char.x_factor_skill }}{% endif %}{% if char.x_factor_skill and char.x_factor %} &#10; {% endif %}{{ char.x_factor }}</textarea>
 		<textarea class="absolute" id="opmerkingen" name="opmerkingen">{{ char.opmerkingen }}</textarea>
 	</form>
 
@@ -107,14 +107,17 @@
 	<div>
 		<table id="eigendom_lijst">
 			{% if char.item_set.count %}
-					<th>Bezittingen:</th>
+				<th>Bezittingen:</th>
+				<tr>
+					<th>naam</th>
+				</tr>
 				{% for item in char.item_set.all %}
 					<tr>
-						<td>{{ item.naam }}</td>
+						<td id="tabel_naam">{{ item.naam }}</td>
 					</tr>
 				{% endfor %}
 			{% endif %}
-						{% if char.recipes.count %}
+			{% if char.recipes.count %}
 				<th>Recepten:</th>
 				<tr>
 					<th>naam</th>
@@ -126,18 +129,6 @@
 						<td id="tabel_recept" >{{ recipe.name }}</td>
 						<td id="tabel_xp"></td>
 						<td id="tabel_mana" >{{ recipe.code }}</td>
-					</tr>
-				{% endfor %}
-			{% endif %}
-		</table>
-	</div>
-	<div>
-    <table id="eigendom_lijst">
-			{% if char.item_set.count %}
-					<th>Bezittingen:</th>
-				{% for item in char.item_set.all %}
-					<tr>
-						<td id="tabel_naam">{{ item.naam }}</td>
 					</tr>
 				{% endfor %}
 			{% endif %}
