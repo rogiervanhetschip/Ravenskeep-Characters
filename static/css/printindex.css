@@ -6,6 +6,7 @@ body{
 textarea{
 	border: none !IMPORTANT;
 	overflow: hidden;
+	background-color: transparent;
 }
 
 th, td{
@@ -282,10 +283,10 @@ input[type="radio"]{
 
 #opmerkingen{
 	font-family: Arial, Verdana, Helvetica;
-	top: 162mm;
+	top: 128mm;
 	left: 152.5mm;
 	width: 130.5mm;
-	height: 34mm;
+	height: 67mm;
 }
 
 #eigendom_lijst{
@@ -327,7 +328,21 @@ input[type="radio"]{
 .tabel_naam{
 	width: 70%
 }
+.lW {
+	top: 128mm;
+	left: 152.5mm;
+	float: left; 
+	clear: left; 
+	height: 15px; 
+}
 
+.rW { 
+	top: 128mm;
+	left: 152.5mm;
+	float: right; 
+	clear: right; 
+	height: 15px; 
+}
 .pagebreak
 {
   page-break-after: always;
