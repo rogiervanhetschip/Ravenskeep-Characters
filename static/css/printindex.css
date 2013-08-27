@@ -3,6 +3,10 @@ body{
 	padding:0px;
 }
 
+p{
+	word-wrap:break-word;
+}
+
 textarea{
 	border: none !IMPORTANT;
 	overflow: hidden;
