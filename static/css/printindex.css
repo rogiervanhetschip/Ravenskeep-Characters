@@ -30,6 +30,7 @@ input[type="radio"]{
 	font-size: 3mm;
 	position: absolute;
 	/*background-color: transparent;*/
+	border: solid black 1px;
 	resize: none;
 }
 
