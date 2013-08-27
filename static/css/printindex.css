@@ -282,11 +282,13 @@ input[type="radio"]{
 }
 
 #opmerkingen{
+	float: right;
 	font-family: Arial, Verdana, Helvetica;
 	top: 128mm;
 	left: 152.5mm;
 	width: 130.5mm;
 	height: 67mm;
+	border; none;	
 }
 
 #eigendom_lijst{
