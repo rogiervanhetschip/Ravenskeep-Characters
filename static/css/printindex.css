@@ -326,7 +326,7 @@ input[type="radio"]{
 	border: none;
 	position: absolute;
 	left: 152.3mm;
-	top:  16mm;
+	top:  13mm;
 	width: 43mm;
 }
 
@@ -334,7 +334,7 @@ input[type="radio"]{
 	border: 1px black solid;
 	position: absolute;
 	left: 200mm;
-	top:  16mm;
+	top:  13mm;
 	width: 35mm;
 }
 
@@ -342,6 +342,6 @@ input[type="radio"]{
 	border: 1px black solid;
 	position: absolute;
 	left: 239mm;
-	top:  16mm;
+	top:  13mm;
 	width: 47mm;
 }
