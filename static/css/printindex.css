@@ -329,6 +329,7 @@ input[type="radio"]{
 	width: 70%
 }
 .lW {
+	position: absolute;
 	top: 128mm;
 	left: 152.5mm;
 	float: left; 
@@ -337,6 +338,7 @@ input[type="radio"]{
 }
 
 .rW { 
+	position: absolute;
 	top: 128mm;
 	left: 152.5mm;
 	float: right; 
