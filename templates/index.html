@@ -10,7 +10,7 @@
 {% block content %}
 <div class="row">
   {% if chars.has_other_pages %}
-  <div class="pagination span4">
+  <div class="pagination span5">
     <ul>
       {% if chars.has_previous %}
       <li><a href="{% url home %}?page_nr={{ chars.previous_page_number }}">&laquo; Prev</a></li>
