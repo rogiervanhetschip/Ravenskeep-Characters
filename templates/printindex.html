@@ -56,8 +56,9 @@
 		<input class="absolute" id="lvlreligie" name="lvlreligie">
 		<input class="absolute" id="lvlambacht" name="lvlambacht">
 		<textarea class="absolute" id="xfactor" name="xfactor">{{ char.x_factor }}{% if char.x_factor_skill and char.x_factor %}&#10;&#10;{% endif %}{% if char.x_factor_skill %}X - Factor Skill: {{ char.x_factor_skill }}{% endif %}</textarea>
+		{% spaceless %}
 		<textarea class="absolute" id="opmerkingen" name="opmerkingen">{{ char.opmerkingen.strip|safe|removetags:"p img" }}</textarea>
-
+		{% endspaceless %}
 
 		<div id="tabelrechts">
 			<table id="s_lijst">
