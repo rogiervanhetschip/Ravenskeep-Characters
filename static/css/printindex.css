@@ -296,27 +296,35 @@ input[type="radio"]{
 	width: 48.5mm;
 }
 
-#vsr_lijst{
+#v_lijst{
 	border: 1px black solid;
 	position: absolute;
 	left: 208mm;
 	top:  16mm;
-	width: 75mm;
+	width: 29mm;
 }
 
-#tabel_recept{
+#s_lijst{
+	border: 1px black solid;
+	position: absolute;
+	left: 238mm;
+	top:  16mm;
+	width: 46mm;
+}
+
+.tabel_recept{
 	width: 80%;
 }
 
-#tabel_mana{
+.tabel_mana{
 	width: 20%
 }
 
-#tabel_xp{
+.tabel_xp{
 	width: 10%
 }
 
-#tabel_naam{
+.tabel_naam{
 	width: 70%
 }
 

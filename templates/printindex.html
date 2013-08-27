@@ -60,44 +60,49 @@
 
 
 	<div id="tabelrechts">
-		<table id="vsr_lijst">
-			{% if char.skills.count %}
-					<th>Vaardigheden:</th>
-						<tr>
-							<th>naam</th>
-							<th>xp</th>
-							<th></th>
-						</tr>
-					{% for skill in char.skills.all %}
-						<tr>
-							<td id="tabel_naam" >{{ skill.naam }}</td> 
-							<td id="tabel_xp" >{{ skill.xp }}</td>
-						</tr>
-					{% endfor %}
-			{% endif %}
+		<table id="s_lijst">
 			{% if char.priest_spells.count or char.mage_spells.count %}
-			<th>Spreuken:</th>
+				<tr>
+					<th colspan="3">Spreuken:</th>
+				</tr>
 				<tr>
 					<th>naam</th>
 					<th>niveau</th>
 					<th>mana</th>
 				</tr>
-			{% endif %}
-			{% if char.priest_spells.count %}
-				{% for spell in char.priest_spells.all %}
+				{% if char.priest_spells.count %}
+					{% for spell in char.priest_spells.all %}
 					<tr>
-							<td id="tabel_naam" >{{ spell.naam }}</td>
-							<td id="tabel_xp" >{{ spell.niveau }}</td>
-							<td id="tabel_mana" >{{ spell.mana }}<td>
-					</tr>
-				{% endfor %}
+							<td class="tabel_naam" >{{ spell.naam }}</td>
+							<td class="tabel_xp" >{{ spell.niveau }}</td>
+							<td class="tabel_mana" >{{ spell.mana }}<td>
+					</tr>	
+					{% endfor %}
+				{% endif %}
+				{% if char.mage_spells.count %}
+					{% for spell in char.mage_spells.all %}
+						<tr>
+							<td class="tabel_naam" >{{ spell.naam }}</td>
+							<td class="tabel_xp" >{{ spell.niveau }}</td>
+							<td class="tabel_mana" >{{ spell.mana }}<td>
+						</tr>
+					{% endfor %}
+				{% endif %}
 			{% endif %}
-			{% if char.mage_spells.count %}
-				{% for spell in char.mage_spells.all %}
+		</table>
+		<table id="v_lijst">
+			{% if char.skills.count %}
+				<tr>
+					<th colspan="2">Vaardigheden:</th>
+				</tr>
+				<tr>
+					<th>naam</th>
+					<th>xp</th>
+				</tr>	
+				{% for skill in char.skills.all %}
 					<tr>
-						<td id="tabel_naam" >{{ spell.naam }}</td>
-						<td id="tabel_xp" >{{ spell.niveau }}</td>
-						<td id="tabel_mana" >{{ spell.mana }}<td>
+						<td class="tabel_naam" >{{ skill.naam }}</td> 
+						<td class="tabel_xp" >{{ skill.xp }}</td>
 					</tr>
 				{% endfor %}
 			{% endif %}
@@ -113,7 +118,7 @@
 				</tr>
 				{% for item in char.item_set.all %}
 					<tr>
-						<td id="tabel_naam">{{ item.naam }}</td>
+						<td class="tabel_naam">{{ item.naam }}</td>
 					</tr>
 				{% endfor %}
 			{% endif %}
@@ -126,9 +131,9 @@
 				</tr>
 				{% for recipe in char.recipes.all %}
 					<tr>
-						<td id="tabel_recept" >{{ recipe.name }}</td>
-						<td id="tabel_xp"></td>
-						<td id="tabel_mana" >{{ recipe.code }}</td>
+						<td class="tabel_recept" >{{ recipe.name }}</td>
+						<td class="tabel_xp"></td>
+						<td class="tabel_mana" >{{ recipe.code }}</td>
 					</tr>
 				{% endfor %}
 			{% endif %}
