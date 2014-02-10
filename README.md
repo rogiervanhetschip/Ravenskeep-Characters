@@ -27,7 +27,7 @@ Now, the install instructions. Note that much of this is explained in the links 
 7. Start your virtual environment: `source env/bin/activate`
 8. Install the necessary software in the virtual environment: `pip install -r requirements.txt`, again done in a command line from the source code root directory.
 9. Set a local variable: `export LOCAL_DEV=true`. This variable will allow the environment to recognize it should use your local database. For specifics, see ravenskeepChars/settings.py.
-10. The database has not been set up. To create all tables, run `python runserver.py syncdb`. This will allow you to create an admin account. At the end there will be a warning, `chars` is not yet set up.
+10. The database has not been set up. To create all tables, run `python manage.py syncdb`. This will allow you to create an admin account. At the end there will be a warning, `chars` is not yet set up.
 11. To set up your chars tables: `python runserver.py migrate chars`. The database will be set up as described in the chars/migrations directory. Django database migration tool South will take care of this.
 12. Start your server, using `python manage.py runserver`
 13. Point your browser at http://localhost:8000!
