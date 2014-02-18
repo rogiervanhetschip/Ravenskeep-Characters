@@ -23,8 +23,6 @@ DATABASES = {
     'default': dj_database_url.config(default='postgres://localhost')
 }
 
-#pdb.set_trace()
-
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -162,10 +160,29 @@ LOGGING = {
     }
 }
 
+############################################
+#           Import local settings          #
+############################################
+
+#TODO: Current dir is digi/ravenskeepChars
+
+SETTINGS_LOCAL = 'ravenskeepChars/settings_local.py'
+SETTINGS_LOCAL_TEMPLATE = 'ravenskeepChars/settings_local.py.template'
+REPLACE_STRING = '<SECRET_KEY>'
+
 # if settings_local file not found
+if not os.path.isfile(SETTINGS_LOCAL):
     # generate new secret key
-    # Copy settings_local.py.template to settings_local.py
-    # In settings_local.py, replace <SECRET_KEY> by the new secret key
+    import random
+    new_key = ''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)') for i in range(50)])
+
+    # Read settings_local.py.template and insert new secret key
+    contents = open(SETTINGS_LOCAL_TEMPLATE).read().replace(REPLACE_STRING, new_key)
+    
+    # Write new contents to settings_local.py
+    settings_local = file(SETTINGS_LOCAL, 'w')
+    settings_local.write(contents)
+    settings_local.close()
 
 # Import local settings last, so as to overwrite anything set here
 from settings_local import *
