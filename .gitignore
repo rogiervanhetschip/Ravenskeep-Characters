@@ -5,3 +5,6 @@ env/
 *.swp
 *.swo
 
+# Ignore any local settings files
+ravenskeepChars/settings_local.py
+
