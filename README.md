@@ -20,7 +20,7 @@ Now, the install instructions. Note that much of this is explained in the links 
 
 1. Create a Github account. The code is hosted at [https://github.com/rogiervanhetschip/Ravenskeep-Characters](https://github.com/rogiervanhetschip/Ravenskeep-Characters)
 2. Install Git, at least version 1.8.1.2.
-3. Install virtualenv (to host all software in a virtual machine, which should keep your OS clean), PostgreSQL (the database), Git (version control, at least version 1.8.1.2) and a Git GUI if you so require (Git itself is command-line only).
+3. Install virtualenv (to host all software in a virtual machine, which should keep your OS clean), PostgreSQL (the database) and a Git GUI if you so require (Git itself is command-line only).
 4. Either fork the code, via instructions found at https://help.github.com/articles/fork-a-repo, or e-mail me to get added to the project as a developer.
 5. Download the code.
 6. Create the virtual environment by entering `virtualenv env` in a command line, in the directory where you put the code. A directory `env` is created, containing scripts.
@@ -29,8 +29,8 @@ Now, the install instructions. Note that much of this is explained in the links 
 9. The database has not been set up. To create all tables, run `python runserver.py syncdb`. This will allow you to create an admin account. At the end there will be a warning, `chars` is not yet set up.
 10. To set up your chars tables: `python runserver.py migrate chars`. The database will be set up as described in the chars/migrations directory. Django database migration tool South will take care of this.
 11. Your database settings are not yet known to the application. Run `python manage.py runserver`, quit and add your database settings to `ravenskeepChars/settings_local.py`.
-11. Start your server, using `python manage.py runserver`
-12. Point your browser at http://localhost:8000!
+12. Start your server, using `python manage.py runserver`
+13. Point your browser at http://localhost:8000!
 
-To start development at a later time, execute steps 7, 11 and 12.
+To start development at a later time, execute steps 7, 12 and 13.
 
