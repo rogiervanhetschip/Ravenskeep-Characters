@@ -8,13 +8,17 @@ from django.shortcuts import redirect
 from django.shortcuts import render_to_response
 from django.db.models.signals import m2m_changed
 from django.dispatch import receiver
+import dbsettings
 import pdb
+
+class LiveOptions(dbsettings.Group):
+  default_starting_live = dbsettings.PositiveIntegerValue('default starting live for new characters')
 
 class Character(models.Model):
   speler = models.ForeignKey('Player')
   character_naam = models.CharField(max_length=50)
   ras = models.ForeignKey('Race')
-  eerste_live = models.PositiveIntegerField(default=31)
+  eerste_live = models.PositiveIntegerField(default=LiveOptions().default_starting_live)
   live_nr = models.PositiveIntegerField(default=1)
   hitpoints = models.PositiveIntegerField(default=1)
   mana = models.PositiveIntegerField(default=0)

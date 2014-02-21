@@ -22,5 +22,7 @@ urlpatterns = patterns('',
     # http://twigstechtips.blogspot.nl/2009/08/django-how-to-serve-media-files-css.html
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     
+    # Django-dbsettings
+    url(r'^settings/', include('dbsettings.urls')),
 )
 

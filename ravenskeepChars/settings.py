@@ -125,6 +125,7 @@ INSTALLED_APPS = (
     'south',
     'chars',
     'widget_tweaks',
+    'dbsettings',
 )
 
 LOGIN_URL = '/login/'
@@ -163,8 +164,6 @@ LOGGING = {
 ############################################
 #           Import local settings          #
 ############################################
-
-#TODO: Current dir is digi/ravenskeepChars
 
 SETTINGS_LOCAL = 'ravenskeepChars/settings_local.py'
 SETTINGS_LOCAL_TEMPLATE = 'ravenskeepChars/settings_local.py.template'
