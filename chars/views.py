@@ -8,7 +8,7 @@ from django.db.models import Q
 from chars.models import Character, Item
 from chars.forms import CharacterForm
 from tempfile import *
-from subproces import Popen, PIPE
+from subprocess import Popen, PIPE
 
 def admin_rights(request):
   if request.user.is_staff:
@@ -56,9 +56,9 @@ def charPdf(request, char_id):
     'printindex.html',
     {
       'chars': char
-    }
+    })
 
-def render_to_pdf(template_src, context_dict):
+def renderToPdf(template_src, context_dict):
   tempfile = gettempdir()+"/results.pdf"
   command_args = "/path/to/wkhtmltopdf -O %s -s %s -T 0 -R 0 -B 0 -L 0 http://pdfurl %s" % ('Landscape', 'Tabloid', tempfile)
   popen = Popen(["sh", "-c", command_args])
