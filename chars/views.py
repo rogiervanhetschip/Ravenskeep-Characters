@@ -7,7 +7,7 @@ from django.forms.models import inlineformset_factory
 from django.db.models import Q
 from chars.models import Character, Item
 from chars.forms import CharacterForm
-from xhtml2pdf import pisa
+from ho.pisa as pisa
 
 def admin_rights(request):
   if request.user.is_staff:
@@ -50,14 +50,22 @@ def charsPrintPreview(request, chars):
 
 @login_required
 def charPdf(request, char_id):
-  template = get_template('printindex.html')
   char = get_object_or_404(Character, id=char_id)
-  context = Context(char)
+  return render_to_pdf(
+    'printindex.html',
+    {
+      'chars': char
+    }
+
+def render_to_pdf(template_src, context_dict):
+  template = get_template(template_src)
+  context = Context(context_dict)
   html = template.render(context)
   result = StringIO.StringIO()
-  pdf = pisa.createPDF(StringIO.StringIO(html.encode("ISO-8859-1")), dest=result)
+
+  pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("ISO-8859-1")), result)
   if not pdf.err:
-    return result.getvalue()
+    return HttpResponse(result.getvalue(), content_type='application/pdf')
   return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))
 
 @login_required
