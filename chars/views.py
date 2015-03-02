@@ -7,7 +7,8 @@ from django.forms.models import inlineformset_factory
 from django.db.models import Q
 from chars.models import Character, Item
 from chars.forms import CharacterForm
-from ho.pisa as pisa
+from tempfile import *
+from subproces import Popen, PIPE
 
 def admin_rights(request):
   if request.user.is_staff:
@@ -58,15 +59,14 @@ def charPdf(request, char_id):
     }
 
 def render_to_pdf(template_src, context_dict):
-  template = get_template(template_src)
-  context = Context(context_dict)
-  html = template.render(context)
-  result = StringIO.StringIO()
-
-  pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("ISO-8859-1")), result)
-  if not pdf.err:
-    return HttpResponse(result.getvalue(), content_type='application/pdf')
-  return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))
+  tempfile = gettempdir()+"/results.pdf"
+  command_args = "/path/to/wkhtmltopdf -O %s -s %s -T 0 -R 0 -B 0 -L 0 http://pdfurl %s" % ('Landscape', 'Tabloid', tempfile)
+  popen = Popen(["sh", "-c", command_args])
+  popen.wait()
+  f = open(tempfile, 'r')
+  pdf_contents = f.read()
+  f.close()
+  return HttpResponse(pdf_contents, mimetype='application/pdf')
 
 @login_required
 def charsPdf(request, chars):
