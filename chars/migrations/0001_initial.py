@@ -1,180 +1,204 @@
 # -*- coding: utf-8 -*-
-import datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+from __future__ import unicode_literals
+
+from django.db import models, migrations
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
-        # Adding model 'Character'
-        db.create_table('chars_character', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('spelerid', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['chars.Player'])),
-            ('character_naam', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('ras', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['chars.Race'])),
-            ('eerste_live', self.gf('django.db.models.fields.PositiveIntegerField')(default=31)),
-            ('lives_overleefd', self.gf('django.db.models.fields.PositiveIntegerField')(default=1)),
-            ('xp_totaal', self.gf('django.db.models.fields.PositiveIntegerField')(default=0)),
-            ('xp_besteed', self.gf('django.db.models.fields.PositiveIntegerField')(default=0)),
-            ('xp_restant', self.gf('django.db.models.fields.PositiveIntegerField')(default=0)),
-            ('hitpoints', self.gf('django.db.models.fields.PositiveIntegerField')(default=1)),
-            ('mana', self.gf('django.db.models.fields.PositiveIntegerField')(default=0)),
-            ('god', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['chars.God'], null=True, blank=True)),
-            ('opmerkingen', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('x_factor', self.gf('django.db.models.fields.CharField')(max_length=250, blank=True)),
-        ))
-        db.send_create_signal('chars', ['Character'])
+    dependencies = [
+    ]
 
-        # Adding M2M table for field skills on 'Character'
-        db.create_table('chars_character_skills', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('character', models.ForeignKey(orm['chars.character'], null=False)),
-            ('skill', models.ForeignKey(orm['chars.skill'], null=False))
-        ))
-        db.create_unique('chars_character_skills', ['character_id', 'skill_id'])
-
-        # Adding M2M table for field spreuken on 'Character'
-        db.create_table('chars_character_spreuken', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('character', models.ForeignKey(orm['chars.character'], null=False)),
-            ('spell', models.ForeignKey(orm['chars.spell'], null=False))
-        ))
-        db.create_unique('chars_character_spreuken', ['character_id', 'spell_id'])
-
-        # Adding model 'Player'
-        db.create_table('chars_player', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('voornaam', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('tussenvoegsels', self.gf('django.db.models.fields.CharField')(max_length=50, blank=True)),
-            ('achternaam', self.gf('django.db.models.fields.CharField')(max_length=50)),
-        ))
-        db.send_create_signal('chars', ['Player'])
-
-        # Adding model 'Skill'
-        db.create_table('chars_skill', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('naam', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('punten', self.gf('django.db.models.fields.PositiveIntegerField')()),
-        ))
-        db.send_create_signal('chars', ['Skill'])
-
-        # Adding model 'God'
-        db.create_table('chars_god', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('naam', self.gf('django.db.models.fields.CharField')(max_length=50)),
-        ))
-        db.send_create_signal('chars', ['God'])
-
-        # Adding model 'Race'
-        db.create_table('chars_race', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('naam', self.gf('django.db.models.fields.CharField')(max_length=50)),
-        ))
-        db.send_create_signal('chars', ['Race'])
-
-        # Adding model 'Item'
-        db.create_table('chars_item', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('naam', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('character_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['chars.Character'])),
-        ))
-        db.send_create_signal('chars', ['Item'])
-
-        # Adding model 'Spell'
-        db.create_table('chars_spell', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('naam', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('niveau', self.gf('django.db.models.fields.PositiveIntegerField')()),
-        ))
-        db.send_create_signal('chars', ['Spell'])
-
-
-    def backwards(self, orm):
-        # Deleting model 'Character'
-        db.delete_table('chars_character')
-
-        # Removing M2M table for field skills on 'Character'
-        db.delete_table('chars_character_skills')
-
-        # Removing M2M table for field spreuken on 'Character'
-        db.delete_table('chars_character_spreuken')
-
-        # Deleting model 'Player'
-        db.delete_table('chars_player')
-
-        # Deleting model 'Skill'
-        db.delete_table('chars_skill')
-
-        # Deleting model 'God'
-        db.delete_table('chars_god')
-
-        # Deleting model 'Race'
-        db.delete_table('chars_race')
-
-        # Deleting model 'Item'
-        db.delete_table('chars_item')
-
-        # Deleting model 'Spell'
-        db.delete_table('chars_spell')
-
-
-    models = {
-        'chars.character': {
-            'Meta': {'object_name': 'Character'},
-            'character_naam': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'eerste_live': ('django.db.models.fields.PositiveIntegerField', [], {'default': '31'}),
-            'god': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['chars.God']", 'null': 'True', 'blank': 'True'}),
-            'hitpoints': ('django.db.models.fields.PositiveIntegerField', [], {'default': '1'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'lives_overleefd': ('django.db.models.fields.PositiveIntegerField', [], {'default': '1'}),
-            'mana': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
-            'opmerkingen': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'ras': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['chars.Race']"}),
-            'skills': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['chars.Skill']", 'null': 'True', 'blank': 'True'}),
-            'spelerid': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['chars.Player']"}),
-            'spreuken': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['chars.Spell']", 'null': 'True', 'blank': 'True'}),
-            'x_factor': ('django.db.models.fields.CharField', [], {'max_length': '250', 'blank': 'True'}),
-            'xp_besteed': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
-            'xp_restant': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
-            'xp_totaal': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'})
-        },
-        'chars.god': {
-            'Meta': {'object_name': 'God'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'naam': ('django.db.models.fields.CharField', [], {'max_length': '50'})
-        },
-        'chars.item': {
-            'Meta': {'object_name': 'Item'},
-            'character_id': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['chars.Character']"}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'naam': ('django.db.models.fields.CharField', [], {'max_length': '50'})
-        },
-        'chars.player': {
-            'Meta': {'object_name': 'Player'},
-            'achternaam': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'tussenvoegsels': ('django.db.models.fields.CharField', [], {'max_length': '50', 'blank': 'True'}),
-            'voornaam': ('django.db.models.fields.CharField', [], {'max_length': '50'})
-        },
-        'chars.race': {
-            'Meta': {'object_name': 'Race'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'naam': ('django.db.models.fields.CharField', [], {'max_length': '50'})
-        },
-        'chars.skill': {
-            'Meta': {'object_name': 'Skill'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'naam': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'punten': ('django.db.models.fields.PositiveIntegerField', [], {})
-        },
-        'chars.spell': {
-            'Meta': {'object_name': 'Spell'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'naam': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'niveau': ('django.db.models.fields.PositiveIntegerField', [], {})
-        }
-    }
-
-    complete_apps = ['chars']
+    operations = [
+        migrations.CreateModel(
+            name='Character',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('character_naam', models.CharField(max_length=50)),
+                ('eerste_live', models.PositiveIntegerField(default=None)),
+                ('live_nr', models.PositiveIntegerField(default=1)),
+                ('first_live_nr_mana', models.PositiveIntegerField(default=0)),
+                ('has_mana', models.BooleanField(help_text=b'Character has mana of its own, even without receiving mana from Skills')),
+                ('opmerkingen', models.TextField(blank=True)),
+                ('x_factor', models.CharField(max_length=500, blank=True)),
+                ('dood', models.BooleanField()),
+                ('leermeesterpunten', models.PositiveIntegerField(default=0)),
+            ],
+            options={
+                'ordering': ['speler', 'character_naam'],
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='God',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('naam', models.CharField(max_length=50)),
+            ],
+            options={
+                'ordering': ['naam'],
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Item',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('naam', models.CharField(max_length=50)),
+                ('character', models.ForeignKey(to='chars.Character')),
+            ],
+            options={
+                'ordering': ['character', 'naam'],
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Player',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('voornaam', models.CharField(max_length=50)),
+                ('tussenvoegsels', models.CharField(max_length=50, blank=True)),
+                ('achternaam', models.CharField(max_length=50)),
+                ('name', models.CharField(max_length=150, blank=True)),
+            ],
+            options={
+                'ordering': ['voornaam', 'achternaam'],
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Race',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('naam', models.CharField(max_length=50)),
+                ('xp_extra', models.BooleanField()),
+            ],
+            options={
+                'ordering': ['naam'],
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Recipe',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=50)),
+                ('code', models.CharField(max_length=5)),
+            ],
+            options={
+                'ordering': ['code', 'name'],
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Skill',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('naam', models.CharField(max_length=50)),
+                ('xp', models.PositiveIntegerField()),
+                ('gives_mana', models.BooleanField()),
+                ('extra_hitpoints', models.PositiveIntegerField(default=0)),
+                ('extra_mana', models.PositiveIntegerField(default=0)),
+                ('free_123_spells', models.PositiveIntegerField(default=0)),
+                ('free_456_spells', models.PositiveIntegerField(default=0)),
+                ('free_789_spells', models.PositiveIntegerField(default=0)),
+                ('free_recipes', models.PositiveIntegerField(default=0)),
+            ],
+            options={
+                'ordering': ['naam'],
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Spell',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('naam', models.CharField(max_length=50)),
+                ('niveau', models.PositiveIntegerField()),
+                ('xp', models.PositiveIntegerField()),
+                ('mana', models.PositiveIntegerField()),
+            ],
+            options={
+                'ordering': ['niveau', 'naam'],
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='PriestSpell',
+            fields=[
+                ('spell_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='chars.Spell')),
+            ],
+            options={
+            },
+            bases=('chars.spell',),
+        ),
+        migrations.CreateModel(
+            name='MageSpell',
+            fields=[
+                ('spell_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='chars.Spell')),
+            ],
+            options={
+            },
+            bases=('chars.spell',),
+        ),
+        migrations.AddField(
+            model_name='race',
+            name='skill',
+            field=models.ForeignKey(blank=True, to='chars.Skill', null=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='character',
+            name='god',
+            field=models.ForeignKey(blank=True, to='chars.God', null=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='character',
+            name='mage_spells',
+            field=models.ManyToManyField(related_name='MageSpells', null=True, to='chars.MageSpell', blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='character',
+            name='priest_spells',
+            field=models.ManyToManyField(related_name='Priest_Spells', null=True, to='chars.PriestSpell', blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='character',
+            name='ras',
+            field=models.ForeignKey(to='chars.Race'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='character',
+            name='recipes',
+            field=models.ManyToManyField(to='chars.Recipe', null=True, blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='character',
+            name='skills',
+            field=models.ManyToManyField(related_name='skills', null=True, to='chars.Skill', blank=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='character',
+            name='speler',
+            field=models.ForeignKey(to='chars.Player'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='character',
+            name='subgod',
+            field=models.ForeignKey(related_name='subgod_character', blank=True, to='chars.God', null=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='character',
+            name='x_factor_skill',
+            field=models.ForeignKey(related_name='x_factor_skill', blank=True, to='chars.Skill', null=True),
+            preserve_default=True,
+        ),
+    ]

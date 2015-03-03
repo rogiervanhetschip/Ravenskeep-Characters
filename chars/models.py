@@ -23,7 +23,7 @@ class Character(models.Model):
   hitpoints = models.PositiveIntegerField(default=1)
   mana = models.PositiveIntegerField(default=0)
   first_live_nr_mana = models.PositiveIntegerField(default=0)
-  has_mana = models.BooleanField(help_text='Character has mana of its own, even without receiving mana from Skills')
+  has_mana = models.BooleanField(default=False, help_text='Character has mana of its own, even without receiving mana from Skills')
   god = models.ForeignKey('God', null=True, blank=True)
   subgod = models.ForeignKey('God', null=True, blank=True, related_name='subgod_character')
   skills = models.ManyToManyField('Skill', null=True, blank=True, related_name='skills')
@@ -33,7 +33,7 @@ class Character(models.Model):
   mage_spells = models.ManyToManyField('MageSpell', null=True, blank=True, related_name='MageSpells')
   priest_spells = models.ManyToManyField('PriestSpell', null=True, blank=True, related_name='Priest_Spells')
   recipes = models.ManyToManyField('Recipe', null=True, blank=True)
-  dood = models.BooleanField()
+  dood = models.BooleanField(default=False)
   leermeesterpunten = models.PositiveIntegerField(default=0)
 
   def all_skills(self):
@@ -187,7 +187,7 @@ class Player(models.Model):
 class Skill(models.Model):
   naam = models.CharField(max_length=50)
   xp = models.PositiveIntegerField()
-  gives_mana = models.BooleanField()
+  gives_mana = models.BooleanField(default=False)
   extra_hitpoints = models.PositiveIntegerField(default=0)
   extra_mana = models.PositiveIntegerField(default=0)
   free_123_spells = models.PositiveIntegerField(default=0)
@@ -213,7 +213,7 @@ class God(models.Model):
 class Race(models.Model):
   naam = models.CharField(max_length=50)
   skill = models.ForeignKey('Skill', null=True, blank=True)
-  xp_extra = models.BooleanField()
+  xp_extra = models.BooleanField(default=False)
 
   def __unicode__(self):
     return self.naam
